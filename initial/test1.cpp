@@ -1,8 +1,8 @@
 #include "struct_sinh_vien.h"
 #include "khoiTao.h"
 #include "xuat_danh_sach.h"
-#include "xoa.h"
 #include "lietKe_Va_TinhDiemTB.h"
+#include "xoa.h"
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2")
 
@@ -119,6 +119,25 @@ void menu()
             }
             if (lc1 == "4") 
                 xoaVong(ds, msv);
+        }
+
+        else if (lc2 == "5")
+        {
+            if (lc1 == "2")
+                findMaxDon(ds);
+            
+        }
+
+        else if (lc2 == "6") 
+        {
+            if (lc1 == "2")
+                findMinDon(ds);
+        }
+
+        else if (lc2 == "7") 
+        {
+            if (lc1 == "2") 
+                classAverageDon(ds);
         }
 
 
