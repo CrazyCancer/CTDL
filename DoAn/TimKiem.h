@@ -470,7 +470,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
 }
 
 //--------- dslk đơn
-void luaChonXuatTenDaoNguocDSLKDon(LIST_DON listDon, const string& field, const string& value)
+void luaChonXuatTenDaoNguocDSLKDon(const string& field, const string& value)
 {
     int lc;
     bool backToSearchMenu = false;
@@ -611,7 +611,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
 
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
-            luaChonXuatTenDaoNguocDSLKDon(listDon, "maSV", mssvCanTim);
+            luaChonXuatTenDaoNguocDSLKDon("maSV", mssvCanTim);
 
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
@@ -631,7 +631,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
             formChu(hoCanTim);
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
-            luaChonXuatTenDaoNguocDSLKDon(listDon, "ho", hoCanTim);
+            luaChonXuatTenDaoNguocDSLKDon("ho", hoCanTim);
 
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
@@ -650,7 +650,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
             getline(cin, tenCanTim);
             formChu(tenCanTim);
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-            luaChonXuatTenDaoNguocDSLKDon(listDon, "ten", tenCanTim);
+            luaChonXuatTenDaoNguocDSLKDon("ten", tenCanTim);
 
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
@@ -670,7 +670,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
             formMssv(lopCanTim);
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
-            luaChonXuatTenDaoNguocDSLKDon(listDon, "lop", lopCanTim);
+            luaChonXuatTenDaoNguocDSLKDon("lop", lopCanTim);
 
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
@@ -690,7 +690,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-            luaChonXuatTenDaoNguocDSLKDon(listDon, "diem", tam);
+            luaChonXuatTenDaoNguocDSLKDon("diem", tam);
 
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian

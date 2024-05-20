@@ -100,7 +100,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
     }
 }
 
-void menuChoDSLKDon(LIST_DON listDon)
+void menuChoDSLKDon()
 {
     string luaChon;
     bool backToMainMenu = false;
@@ -139,14 +139,13 @@ void menuChoDSLKDon(LIST_DON listDon)
 
         if (luaChon == "2")
         {
-            cin.ignore();
             timKiemSinhVienDanhSachLkDon(listDon);
         }
 
         if (luaChon == "3")
         {
             cout << "- Them sinh vien tiep theo: ";
-            themSVVaoCuoiDSLKDon(listDon, nhapThongTinSinhVien());
+            themSVVaoCuoiDSLKDon(listDon, nhapThongTinSinhVien(2));
             cout << "\n\tTHEM THANH CONG !!!\n\n";
         }
 
@@ -212,11 +211,11 @@ void menuChoDSLKVong(LIST_VONG listVong)
         getline(cin, luaChon);
 
         regex pattern("[0-9]|10");
-        w
-        }hile (!regex_match(luaChon, pattern))
+        while (!regex_match(luaChon, pattern))
         {
             cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
             getline(cin, luaChon);
+        }
 
         if (luaChon == "1")
         {
@@ -232,7 +231,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
         if (luaChon == "3")
         {
             cout << "- Them sinh vien tiep theo: ";
-            themSVVaoCuoiDSLKVong(listVong, nhapThongTinSinhVien());
+            themSVVaoCuoiDSLKVong(listVong, nhapThongTinSinhVien(3));
             cout << "\n\tTHEM THANH CONG !!!\n\n";
         }
 
@@ -318,7 +317,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
         if (luaChon == "3")
         {
             cout << "- Them sinh vien tiep theo: ";
-            themSVVaoCuoiDSLKKep(listKep, nhapThongTinSinhVien());
+            themSVVaoCuoiDSLKKep(listKep, nhapThongTinSinhVien(4));
             cout << "\n\tTHEM THANH CONG !!!\n\n";
         }
 
@@ -393,11 +392,10 @@ static void mainMenu()
         if (luaChon == "2")
         {
 
-            LIST_DON listDon;
-            khoitaoDSLKDon(listDon);
+            khoitaoDSLKDon();
 
-            nhapDon(listDon);
-            menuChoDSLKDon(listDon);
+            nhapDon();
+            menuChoDSLKDon();
         }
 
         if (luaChon == "3")

@@ -29,7 +29,7 @@ pNODE_DON khoiTaoNodeDon(SV sv) // ----------- ĐƠN
     return p;
 }
 
-void khoitaoDSLKDon(LIST_DON& listDon)
+void khoitaoDSLKDon()
 {
     listDon.pHead_Don = NULL;
 }

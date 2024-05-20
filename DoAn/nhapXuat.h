@@ -47,14 +47,20 @@ string formMssv(string& str)
     return str;
 }
 
-SV nhapThongTinSinhVien()
+SV nhapThongTinSinhVien(int luaChon)
 {
     SV sv;
-    cin.ignore(); // CHỖ NÀY IGNORE Ở SAU KHI NHẬP SỐ
 
     cout << "\n\t- Nhap ma SV: ";
     getline(cin, sv.maSV);
     formMssv(sv.maSV);
+    while (!checkMaSv(sv.maSV, luaChon))
+    {
+        cout << "\nMa sinh vien " << sv.maSV << " da ton tai\nVui long nhap lai ma sinh vien: ";
+        getline(cin, sv.maSV);
+        formMssv(sv.maSV);
+    }
+
     cout << "\n\t- Nhap ho SV: ";
     getline(cin, sv.ho);
     formChu(sv.ho);
@@ -105,12 +111,12 @@ void xuat(SV sv)
     cout << left << setw(32) << sv.maSV << setw(30) << sv.ho + " " + sv.ten << setw(20) << sv.lop << setw(10) << sv.diem << endl;
 }
 
-// --------------------------------------- MẢNG
+//--------------------------------------- MẢNG
 
 void themSinhVienMang(SV sv[], int& soLuongSinhVienMang, int index)
 {
 
-    SV x = nhapThongTinSinhVien();
+    SV x = nhapThongTinSinhVien(1);
     if (index >= 0 && index <= soLuongSinhVienMang)
     {
         for (int i = soLuongSinhVienMang; i > index; i--)
@@ -266,7 +272,7 @@ void nhapMang()
 }
 
 // doc vao danh sach lien ket don
-void nhapDon(LIST_DON& listDon)
+void nhapDon()
 {
     fstream input("DSSV.csv", ios::in | ios::out);
 
