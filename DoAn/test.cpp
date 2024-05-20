@@ -9,8 +9,7 @@
 #include "lietKe_TinhDiem.h"
 #include "TimKiem.h"
 
-
-void menuChoMang(SV listMang[], int& soLuongSinhVien)
+void menuChoMang(SV listMang[], int &soLuongSinhVien)
 {
     string luaChon;
     bool backToMainMenu = false;
@@ -33,9 +32,9 @@ void menuChoMang(SV listMang[], int& soLuongSinhVien)
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhap lua chon: ";
         getline(cin, luaChon);
-        
+
         regex pattern("[0-9]");
-        while (!regex_match(luaChon, pattern)) 
+        while (!regex_match(luaChon, pattern))
         {
             cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
             getline(cin, luaChon);
@@ -73,7 +72,7 @@ void menuChoMang(SV listMang[], int& soLuongSinhVien)
         {
             lietKeSVDiemCaoNhatMang(LIST_MANG, soLuongSinhVien);
         }
-        
+
         if (luaChon == "6")
         {
             lietKeSVDiemThapNhatMang(LIST_MANG, soLuongSinhVien);
@@ -126,13 +125,13 @@ void menuChoDSLKDon(LIST_DON listDon)
         getline(cin, luaChon);
 
         regex pattern("[0-9]|10");
-        while (!regex_match(luaChon, pattern)) 
+        while (!regex_match(luaChon, pattern))
         {
             cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
             getline(cin, luaChon);
         }
-        
-        if (luaChon == "1") 
+
+        if (luaChon == "1")
         {
             inTieuDe();
             xuatDSLKDon(listDon);
@@ -172,7 +171,7 @@ void menuChoDSLKDon(LIST_DON listDon)
         {
             cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKDon(listDon) << endl;
         }
-        
+
         if (luaChon == "10")
         {
             cin.ignore();
@@ -213,13 +212,13 @@ void menuChoDSLKVong(LIST_VONG listVong)
         getline(cin, luaChon);
 
         regex pattern("[0-9]|10");
-        while (!regex_match(luaChon, pattern)) 
+        w
+        }hile (!regex_match(luaChon, pattern))
         {
             cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
             getline(cin, luaChon);
-        }
-        
-        if (luaChon == "1") 
+
+        if (luaChon == "1")
         {
             inTieuDe();
             xuatDSLKVong(listVong);
@@ -258,10 +257,10 @@ void menuChoDSLKVong(LIST_VONG listVong)
         {
             cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKVong(listVong) << endl;
         }
-        
+
         if (luaChon == "10")
         {
-            cin.ignore();
+            backToMainMenu = true;
             break;
         }
         if (luaChon == "0")
@@ -299,13 +298,13 @@ void menuChoDSLKKep(LIST_KEP listKep)
         getline(cin, luaChon);
 
         regex pattern("[0-9]|10");
-        while (!regex_match(luaChon, pattern)) 
+        while (!regex_match(luaChon, pattern))
         {
             cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
             getline(cin, luaChon);
         }
-        
-        if (luaChon == "1") 
+
+        if (luaChon == "1")
         {
             inTieuDe();
             xuatDSLKKep(listKep);
@@ -345,7 +344,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
         {
             cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKKep(listKep) << endl;
         }
-        
+
         if (luaChon == "10")
         {
             cin.ignore();
@@ -379,7 +378,7 @@ static void mainMenu()
         getline(cin, luaChon);
 
         regex pattern("[1-4]");
-        while (!regex_match(luaChon, pattern)) 
+        while (!regex_match(luaChon, pattern))
         {
             cout << "\n Chỉ nhập các số từ 1 -> 4 để chọn: ";
             getline(cin, luaChon);
@@ -423,7 +422,7 @@ static void mainMenu()
     }
 }
 
-int main() 
+int main()
 {
     ios_base::sync_with_stdio(false);
     cout.tie(0);

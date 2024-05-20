@@ -822,10 +822,11 @@ void giaiPhongBoNhoDSLKVong(LIST_VONG& listVong)
     if (listVong.pTail_Vong != NULL)
     {
         pNODE_VONG p = listVong.pTail_Vong->pNext_Vong; // Bắt đầu từ phần tử đầu tiên
-        while (p != NULL)
+        while (p != listVong.pTail_Vong)
         {
             pNODE_VONG temp = p;
             p = p->pNext_Vong;
+            listVong.pTail_Vong->pNext_Vong = p;
             delete temp; // Giải phóng bộ nhớ cho từng phần tử
         }
         listVong.pTail_Vong = NULL; // Đảm bảo rằng pTail trỏ đến NULL sau khi giải phóng

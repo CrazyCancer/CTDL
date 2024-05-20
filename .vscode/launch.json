@@ -20,8 +20,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "f:/code/CTDLGT/Do_An",
-      "program": "f:/code/CTDLGT/Do_An/build/Debug/outDebug",
+      "cwd": "f:/code/CTDLGT/Do_An/DoAn",
+      "program": "f:/code/CTDLGT/Do_An/DoAn/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
