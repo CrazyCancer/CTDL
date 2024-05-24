@@ -28,7 +28,7 @@ enum class Field
     Diem
 };
 template <typename T>
-T getValue(const SV& sv, const string& field)
+T getValue(const SV &sv, const string &field)
 {
     if (field == "maSV")
         return sv.maSV;
@@ -43,7 +43,7 @@ T getValue(const SV& sv, const string& field)
     throw invalid_argument("Field name is invalid");
 }
 
-string getValue(const SV& sv, const string& field)
+string getValue(const SV &sv, const string &field)
 {
     std::ostringstream stream;
     if (field == "maSV")
@@ -63,7 +63,7 @@ string getValue(const SV& sv, const string& field)
 }
 
 template <typename T>
-int Binary_Search(SV listMang[], int left, int right, const T& x, const string& input)
+int Binary_Search(SV listMang[], int left, int right, const T &x, const string &input)
 {
     if (left > right)
     {
@@ -91,7 +91,7 @@ int Binary_Search(SV listMang[], int left, int right, const T& x, const string& 
 }
 
 template <typename T2>
-vector<int> Linear_Search_Substring(SV listMang[], int size, const T2& substring, const string& field)
+vector<int> Linear_Search_Substring(SV listMang[], int size, const T2 &substring, const string &field)
 {
     vector<int> indices;
     for (int i = 0; i < size; ++i)
@@ -107,7 +107,7 @@ vector<int> Linear_Search_Substring(SV listMang[], int size, const T2& substring
 }
 
 // quick sort
-void quickSort(SV a[], int l, int r, const string& input)
+void quickSort(SV a[], int l, int r, const string &input)
 {
 
     string midValue = getValue(a[(l + r) / 2], input);
@@ -153,9 +153,9 @@ string TenDaoNguoc(string str)
 }
 
 // ------------- mảng
-void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int& soLuongSinhVien, const vector<int>& foundIndices, int& index, int thoiGianTimKiem, const string& field, const string& value)
+void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int &soLuongSinhVien, const vector<int> &foundIndices, int &index, int thoiGianTimKiem, const string &field, const string &value)
 {
-    int lc;
+    string lc;
     bool backToSearchMenu = false; // Biến để kiểm tra liệu người dùng muốn quay lại menu tìm kiếm ban đầu hay không
     while (!backToSearchMenu)      // Thực hiện trong khi người dùng không muốn quay lại menu tìm kiếm
     {
@@ -165,11 +165,15 @@ void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int& soLuongSinhVien, const vect
         cout << "\n\t  2. NO";
         cout << "\n\t  3. Quay lai menu tim kiem";
         cout << "\n\t - Nhap lua chon: ";
-        cin >> lc;
 
-        switch (lc)
+        getline(cin, lc);
+        regex pattern("[0-9]");
+        while (!regex_match(lc, pattern))
         {
-        case 1:
+            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+            getline(cin, lc);
+        }
+        if (lc == "1")
         {
             inTieuDe();
             for (int i : foundIndices)
@@ -178,14 +182,14 @@ void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int& soLuongSinhVien, const vect
                 string reversedHo = TenDaoNguoc(LIST_MANG[i].ho);
 
                 // Kiểm tra nếu "ho" bắt đầu bằng giá trị tìm kiếm
-                if (field == "ho" && LIST_MANG[i].ho.find(value) == 0)
+                if (field == "ho" && getValue(LIST_MANG[i], field).find(value) == 0)
                 {
                     SET_COLOR(RED);
                     xuat(LIST_MANG[i]);
                     SET_COLOR(WHITE); // Thay WHITE bằng mã màu mặc định của bạn
                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
                 }
-                else if (field != "ho" && getValue(LIST_MANG[i], field).find(value) != std::string::npos)
+                else if (field != "ho" && getValue(LIST_MANG[i], field)==value)
                 {
                     SET_COLOR(RED);
                     xuat(LIST_MANG[i]);
@@ -196,22 +200,21 @@ void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int& soLuongSinhVien, const vect
 
             cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
             system("pause");
-            break;
         }
 
-        case 2:
+        if (lc == "2")
         {
             inTieuDe();
             for (int i : foundIndices)
             {
                 // Kiểm tra nếu "ho" bắt đầu bằng giá trị tìm kiếm
-                if (field == "ho" && LIST_MANG[i].ho.find(value) == 0)
+                if (field == "ho" && getValue(LIST_MANG[i], field).find(value) == 0)
                 {
                     SET_COLOR(RED);
                     xuat(LIST_MANG[i]);
                     SET_COLOR(WHITE); // Thay WHITE bằng mã màu mặc định của bạn
                 }
-                else if (field != "ho" && getValue(LIST_MANG[i], field).find(value) != std::string::npos)
+                else if (field != "ho" && getValue(LIST_MANG[i], field) == value)
                 {
                     SET_COLOR(RED);
                     xuat(LIST_MANG[i]);
@@ -221,25 +224,19 @@ void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int& soLuongSinhVien, const vect
             cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
 
             system("pause");
-            break;
         }
 
-        case 3:
+        if (lc == "3")
         {
             backToSearchMenu = true; // Đặt biến backToSearchMenu về true để thoát khỏi vòng lặp và quay lại menu tìm kiếm
-            break;
-        }
-
-        default:
-            break;
         }
     }
 }
 
 //----------------
-void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- MẢNG
+void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- MẢNG
 {
-    int lc;
+    string lc;
     // int tgianTimKiem;
     bool backToMenu = false;
     while (!backToMenu)
@@ -256,11 +253,15 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
         cout << "\n\t  0. Thoat.";
         cout << "\n\t======================= END =======================";
         cout << "\n\n\t - Nhap lua chon: ";
-        cin >> lc;
-
-        switch (lc)
+        getline(cin, lc);
+        regex pattern("[0-9]|10");
+        while (!regex_match(lc, pattern))
         {
-        case 1:
+            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            getline(cin, lc);
+        }
+
+        if (lc == "1")
         {
             cin.ignore();
             int index = 0;
@@ -269,15 +270,15 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             getline(cin, mssvCanTim);
             formMssv(mssvCanTim);
             // --- sap xep
-            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "maSV");
 
             //-------------------
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "maSV");
 
             int result_str = Binary_Search<string>(LIST_MANG, 0, soLuongSinhVien - 1, mssvCanTim, "maSV");
 
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start); // Tính thời gian
             int tgianTimKiem = duration.count();
             if (result_str != -1)
             {
@@ -289,14 +290,14 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             }
             else
             {
-                cout << "Not found" << endl;
+                cout << "\n\tKhong tim thay ...\n"
+                     << endl;
             }
 
             system("pause");
-            break;
         }
 
-        case 2:
+        if (lc == "2")
         {
             cin.ignore();
             int index = 0;
@@ -306,11 +307,13 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             formChu(hoCanTim);
 
             // --- sap xep thử
-            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "ho");
 
             //-------------------
 
+           
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "ho");
+            
             vector<int> foundIndices = Linear_Search_Substring(LIST_MANG, soLuongSinhVien, hoCanTim, "ho");
 
             auto end = chrono::high_resolution_clock::now();                         // Kết thúc tính thời gian
@@ -323,14 +326,14 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             }
             else
             {
-                cout << "No matches found." << endl;
+                cout << "\n\tKhong tim thay ...\n"
+                     << endl;
             }
 
             system("pause");
-            break;
         }
 
-        case 3:
+        if (lc == "3")
         {
             cin.ignore();
             int index = 0;
@@ -340,16 +343,16 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             formChu(tenCanTim);
 
             // --- sap xep thử
-            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "ten");
 
             //-------------------
 
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "ten");
 
             int result_str = Binary_Search<string>(LIST_MANG, 0, soLuongSinhVien - 1, tenCanTim, "ten");
 
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start); // Tính thời gian
             int tgianTimKiem = duration.count();
             if (result_str != -1)
             {
@@ -367,14 +370,14 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             }
             else
             {
-                cout << "Not found" << endl;
+                cout << "\n\tKhong tim thay ...\n"
+                     << endl;
             }
 
             system("pause");
-            break;
         }
 
-        case 4:
+        if (lc == "4")
         {
             cin.ignore();
             int index = 0;
@@ -383,16 +386,16 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             getline(cin, lopCanTim);
             formMssv(lopCanTim);
             // --- sap xep thử
-            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "lop");
 
             //-------------------
 
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "lop");
 
             int result_str = Binary_Search<string>(LIST_MANG, 0, soLuongSinhVien - 1, lopCanTim, "lop");
 
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start); // Tính thời gian
             int tgianTimKiem = duration.count();
             if (result_str != -1)
             {
@@ -410,14 +413,14 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             }
             else
             {
-                cout << "Not found" << endl;
+                cout << "\n\tKhong tim thay ...\n"
+                     << endl;
             }
 
             system("pause");
-            break;
         }
 
-        case 5:
+        if (lc == "5")
         {
             int index = 0;
             cout << "\n\tNhap diem sinh vien can tim : ";
@@ -425,13 +428,13 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             cin >> diemCanTim;
 
             // --- sap xep thử
-            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "diem");
 
             //-------------------
 
             // tìm
-            int result_str = Binary_Search<float>(LIST_MANG, 0, soLuongSinhVien - 1, diemCanTim, "diem");
+           
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "diem");
 
             vector<int> foundIndices;
             for (int i = 0; i < soLuongSinhVien; ++i)
@@ -442,7 +445,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
                 }
             }
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start); // Tính thời gian
             int tgianTimKiem = duration.count();
             // Chuyển đổi float thành string
             std::ostringstream ss;
@@ -451,29 +454,150 @@ void timKiemSinhVienMang(SV LIST_MANG[], int& soLuongSinhVien) //  ---------- M�
             luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "diem", diemCanTimStr);
 
             system("pause");
-            break;
         }
 
-        case 10:
+        if (lc == "10")
         {
             backToMenu = true;
-            break;
         }
 
-        case 0:
+        if (lc == "0")
         {
             cout << "\n\t == KET THUC CHUONG TRINH ==\n";
             exit(0);
-        }
         }
     }
 }
 
 //--------- dslk đơn
-void luaChonXuatTenDaoNguocDSLKDon(const string& field, const string& value)
+// void luaChonXuatTenDaoNguocDSLKDon(const string &field, const string &value)
+// {
+//     string lc;
+//     bool backToSearchMenu = false;
+
+//     while (!backToSearchMenu)
+//     {
+//         system("cls"); // Xóa màn hình
+//         cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
+//         cout << "\n\t  1. YES";
+//         cout << "\n\t  2. NO";
+//         cout << "\n\t  3. Quay lai menu tim kiem";
+//         cout << "\n\t - Nhap lua chon: ";
+
+//         getline(cin, lc);
+//         regex pattern("[0-9]");
+//         while (!regex_match(lc, pattern))
+//         {
+//             cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+//             getline(cin, lc);
+//         }
+
+//         if (lc == "1")
+//         {
+//             inTieuDe();
+//             node_Don *p = NULL;
+
+//             p = listDon.pHead_Don;
+//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+//             while (p != NULL)
+//             {
+
+//                 // Kiểm tra nếu trường đang tìm kiếm là "ho" và giá trị của "ho" bắt đầu bằng giá trị tìm kiếm
+//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
+//                 {
+//                     string reversedName = TenDaoNguoc(p->data.ten);
+//                     string reversedHo = TenDaoNguoc(p->data.ho);
+//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
+//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
+//                 {
+//                     string reversedName = TenDaoNguoc(p->data.ten);
+//                     string reversedHo = TenDaoNguoc(p->data.ho);
+//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+
+//                 p = p->pNext_Don;
+//             }
+//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+//             int tgianTimKiem = duration.count();
+//             cout << "\n\t--------Thoi gian tim kiem-------: " << tgianTimKiem << endl;
+//             system("pause");
+//         }
+
+//         if (lc == "2")
+//         {
+//             inTieuDe();
+//             node_Don *p = NULL;
+
+//             p = listDon.pHead_Don;
+//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+//             while (p != NULL)
+//             {
+
+//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
+//                 {
+
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
+//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
+//                 {
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+
+//                 p = p->pNext_Don;
+//             }
+//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+//             int tgianTimKiem = duration.count();
+//             cout << "\n\t--------Thoi gian tim kiem-------: " << tgianTimKiem << endl;
+
+//             system("pause");
+//         }
+
+//         if (lc == "3")
+//         {
+//             backToSearchMenu = true;
+//         }
+//     }
+// }
+
+void luaChonXuatTenDaoNguocDSLKDon(LIST_DON &listDon, const string &field, const string &value)
 {
-    int lc;
+    string lc;
     bool backToSearchMenu = false;
+    vector<node_Don *> foundNodes;
+    int thoiGianTimKiem;
+    node_Don *p = listDon.pHead_Don;
+    while (p != NULL)
+    {
+        if ((field == "ho" && getValue(p->data, field).find(value) == 0) ||
+            (field != "ho" && getValue(p->data, field) == value))
+        {
+            foundNodes.push_back(p);
+        }
+        p = p->pNext_Don;
+    }
+
+    if (foundNodes.empty())
+    {
+        cout << "\n\tKhong tim thay ...\n"
+             << endl;
+
+        return;
+    }
 
     while (!backToSearchMenu)
     {
@@ -483,91 +607,63 @@ void luaChonXuatTenDaoNguocDSLKDon(const string& field, const string& value)
         cout << "\n\t  2. NO";
         cout << "\n\t  3. Quay lai menu tim kiem";
         cout << "\n\t - Nhap lua chon: ";
-        cin >> lc;
 
-        switch (lc)
+        getline(cin, lc);
+        regex pattern("[0-9]");
+        while (!regex_match(lc, pattern))
         {
-        case 1:
-        {
-            inTieuDe();
-            node_Don* p = NULL;
-
-            p = listDon.pHead_Don;
-            while (p != NULL)
-            {
-
-                // Kiểm tra nếu trường đang tìm kiếm là "ho" và giá trị của "ho" bắt đầu bằng giá trị tìm kiếm
-                if (field == "ho" && getValue(p->data, field).find(value) == 0)
-                {
-                    string reversedName = TenDaoNguoc(p->data.ten);
-                    string reversedHo = TenDaoNguoc(p->data.ho);
-                    cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-                // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-                else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-                {
-                    string reversedName = TenDaoNguoc(p->data.ten);
-                    string reversedHo = TenDaoNguoc(p->data.ho);
-                    cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-
-                p = p->pNext_Don;
-            }
-
-            system("pause");
-            break;
+            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+            getline(cin, lc);
         }
 
-        case 2:
+        if (lc == "1")
         {
             inTieuDe();
-            node_Don* p = NULL;
+            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
-            p = listDon.pHead_Don;
-            while (p != NULL)
+            for (auto node : foundNodes)
             {
-
-                if (field == "ho" && getValue(p->data, field).find(value) == 0)
-                {
-
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-                // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-                else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-                {
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-
-                p = p->pNext_Don;
+                string reversedName = TenDaoNguoc(node->data.ten);
+                string reversedHo = TenDaoNguoc(node->data.ho);
+                cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+                SET_COLOR(RED);
+                xuat(node->data);
+                SET_COLOR(WHITE);
             }
 
+            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            thoiGianTimKiem = duration.count();
+            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
             system("pause");
-            break;
         }
 
-        case 3:
+        if (lc == "2")
+        {
+            inTieuDe();
+            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+            for (auto node : foundNodes)
+            {
+                SET_COLOR(RED);
+                xuat(node->data);
+                SET_COLOR(WHITE);
+            }
+            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            thoiGianTimKiem = duration.count();
+            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            system("pause");
+        }
+
+        if (lc == "3")
         {
             backToSearchMenu = true;
-            break;
-        }
-
-        default:
-            break;
         }
     }
 }
 
-void giaiPhongBoNhoDSLKDon(LIST_DON& listDon)
+void giaiPhongBoNhoDSLKDon(LIST_DON &listDon)
 {
     pNODE_DON p = listDon.pHead_Don;
     while (p != NULL)
@@ -579,9 +675,9 @@ void giaiPhongBoNhoDSLKDon(LIST_DON& listDon)
     listDon.pHead_Don = NULL; // Đảm bảo danh sách rỗng
 }
 
-void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
+void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
 {
-    int lc;
+    string lc;
     bool backToMainMenu = false;
     while (!backToMainMenu)
     {
@@ -597,11 +693,15 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
         cout << "\n\t  0. Thoat.";
         cout << "\n\t======================= END =======================";
         cout << "\n\n\t - Nhap lua chon: ";
-        cin >> lc;
-
-        switch (lc)
+        getline(cin, lc);
+        regex pattern("[0-9]|10");
+        while (!regex_match(lc, pattern))
         {
-        case 1:
+            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            getline(cin, lc);
+        }
+
+        if (lc == "1")
         {
             cin.ignore();
             cout << "\n\tNhap ma sinh vien can tim : ";
@@ -609,79 +709,51 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
             getline(cin, mssvCanTim);
             formMssv(mssvCanTim);
 
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-
-            luaChonXuatTenDaoNguocDSLKDon("maSV", mssvCanTim);
-
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+            luaChonXuatTenDaoNguocDSLKDon(listDon, "maSV", mssvCanTim);
 
             system("pause");
-            break;
         }
 
-        case 2:
+        if (lc == "2")
         {
             cin.ignore();
             cout << "\n\tNhap ho sinh vien can tim : ";
             string hoCanTim = "";
             getline(cin, hoCanTim);
             formChu(hoCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
-            luaChonXuatTenDaoNguocDSLKDon("ho", hoCanTim);
-
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+            luaChonXuatTenDaoNguocDSLKDon(listDon, "ho", hoCanTim);
 
             system("pause");
-            break;
         }
 
-        case 3:
+        if (lc == "3")
         {
             cin.ignore();
             cout << "\n\tNhap ten sinh vien can tim : ";
             string tenCanTim = "";
             getline(cin, tenCanTim);
             formChu(tenCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-            luaChonXuatTenDaoNguocDSLKDon("ten", tenCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+            luaChonXuatTenDaoNguocDSLKDon(listDon, "ten", tenCanTim);
 
             system("pause");
-            break;
         }
 
-        case 4:
+        if (lc == "4")
         {
             cin.ignore();
             cout << "\n\tNhap lop sinh vien can tim : ";
             string lopCanTim = "";
             getline(cin, lopCanTim);
             formMssv(lopCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
-            luaChonXuatTenDaoNguocDSLKDon("lop", lopCanTim);
-
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+            luaChonXuatTenDaoNguocDSLKDon(listDon, "lop", lopCanTim);
 
             system("pause");
-            break;
         }
 
-        case 5:
+        if (lc == "5")
         {
             cout << "\n\tNhap diem sinh vien can tim : ";
             float diemCanTim;
@@ -689,135 +761,230 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON& listDon)
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-            luaChonXuatTenDaoNguocDSLKDon("diem", tam);
-
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+            luaChonXuatTenDaoNguocDSLKDon(listDon, "diem", tam);
 
             system("pause");
-            break;
         }
 
-        case 10:
+        if (lc == "10")
         {
             backToMainMenu = true;
-            break;
         }
 
-        case 0:
+        if (lc == "0")
         {
             giaiPhongBoNhoDSLKDon(listDon);
             cout << "\n\t == KET THUC CHUONG TRINH ==\n";
             exit(0);
         }
-        }
     }
 }
 
 //--------- dslk vòng
-void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG& listVong, const string& field, const string& value)
+// void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG &listVong, const string &field, const string &value)
+// {
+//     string lc;
+//     bool backToSearchMenu = false;
+
+//     while (!backToSearchMenu)
+//     {
+//         system("cls"); // Xóa màn hình
+//         cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
+//         cout << "\n\t  1. YES";
+//         cout << "\n\t  2. NO";
+//         cout << "\n\t  3. Quay lai menu tim kiem";
+//         cout << "\n\t - Nhap lua chon: ";
+//         getline(cin, lc);
+//         regex pattern("[0-9]");
+//         while (!regex_match(lc, pattern))
+//         {
+//             cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+//             getline(cin, lc);
+//         }
+
+//         if (lc == "1")
+//         {
+//             inTieuDe();
+//             node_Vong *p = NULL;
+//             p = listVong.pTail_Vong;
+//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+//             do
+//             {
+
+//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
+//                 {
+//                     string reversedName = TenDaoNguoc(p->data.ten);
+//                     string reversedHo = TenDaoNguoc(p->data.ho);
+//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
+//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
+//                 {
+//                     string reversedName = TenDaoNguoc(p->data.ten);
+//                     string reversedHo = TenDaoNguoc(p->data.ho);
+//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+
+//                 p = p->pNext_Vong;
+//             } while (p != listVong.pTail_Vong);
+//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+//             int tgianTimKiem = duration.count();
+//             cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+
+//             system("pause");
+//         }
+
+//         if (lc == "2")
+//         {
+//             inTieuDe();
+//             node_Vong *p = NULL;
+//             p = listVong.pTail_Vong;
+//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+//             do
+//             {
+//                 // if (getValue(p->data, field) == value)
+//                 //{
+//                 //     SET_COLOR(RED);
+//                 //     xuat(p->data);
+//                 //     SET_COLOR(WHITE); // Thay WHITE bằng mã màu mặc định của bạn
+//                 // }
+
+//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
+//                 {
+
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
+//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
+//                 {
+
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+
+//                 p = p->pNext_Vong;
+//             } while (p != listVong.pTail_Vong);
+//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+//             int tgianTimKiem = duration.count();
+//             cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+
+//             system("pause");
+//         }
+
+//         if (lc == "3")
+//         {
+//             backToSearchMenu = true;
+//         }
+//     }
+// }
+
+void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG &listVong, const string &field, const string &value)
 {
-    int lc;
+    string lc;
     bool backToSearchMenu = false;
+    vector<node_Vong *> foundNodes;
+    int thoiGianTimKiem;
+    node_Vong *p = listVong.pTail_Vong;
+
+    if (p != NULL)
+    {
+        do
+        {
+            if ((field == "ho" && getValue(p->data, field).find(value) == 0) ||
+                (field != "ho" && getValue(p->data, field) == value))
+            {
+                foundNodes.push_back(p);
+            }
+            p = p->pNext_Vong;
+        } while (p != listVong.pTail_Vong);
+    }
+
+    if (foundNodes.empty())
+    {
+        cout << "\n\tKhong tim thay ...\n"
+             << endl;
+
+        return;
+    }
 
     while (!backToSearchMenu)
     {
-        system("cls"); // Xóa màn hình
+        system("cls");
         cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
         cout << "\n\t  1. YES";
         cout << "\n\t  2. NO";
         cout << "\n\t  3. Quay lai menu tim kiem";
         cout << "\n\t - Nhap lua chon: ";
-        cin >> lc;
 
-        switch (lc)
+        getline(cin, lc);
+        regex pattern("[0-9]");
+        while (!regex_match(lc, pattern))
         {
-        case 1:
-        {
-            inTieuDe();
-            node_Vong* p = NULL;
-            p = listVong.pTail_Vong;
-            do
-            {
-
-                if (field == "ho" && getValue(p->data, field).find(value) == 0)
-                {
-                    string reversedName = TenDaoNguoc(p->data.ten);
-                    string reversedHo = TenDaoNguoc(p->data.ho);
-                    cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-                // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-                else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-                {
-                    string reversedName = TenDaoNguoc(p->data.ten);
-                    string reversedHo = TenDaoNguoc(p->data.ho);
-                    cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-
-                p = p->pNext_Vong;
-            } while (p != listVong.pTail_Vong);
-            system("pause");
-            break;
+            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+            getline(cin, lc);
         }
 
-        case 2:
+        if (lc == "1")
         {
             inTieuDe();
-            node_Vong* p = NULL;
-            p = listVong.pTail_Vong;
-            do
+            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+            for (auto node : foundNodes)
             {
-                // if (getValue(p->data, field) == value)
-                //{
-                //     SET_COLOR(RED);
-                //     xuat(p->data);
-                //     SET_COLOR(WHITE); // Thay WHITE bằng mã màu mặc định của bạn
-                // }
+                string reversedName = TenDaoNguoc(node->data.ten);
+                string reversedHo = TenDaoNguoc(node->data.ho);
+                cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+                SET_COLOR(RED);
+                xuat(node->data);
+                SET_COLOR(WHITE);
+            }
 
-                if (field == "ho" && getValue(p->data, field).find(value) == 0)
-                {
-
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-                // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-                else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-                {
-
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-
-                p = p->pNext_Vong;
-            } while (p != listVong.pTail_Vong);
+            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            thoiGianTimKiem = duration.count();
+            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
             system("pause");
-            break;
         }
 
-        case 3:
+        if (lc == "2")
+        {
+            inTieuDe();
+            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+            for (auto node : foundNodes)
+            {
+                SET_COLOR(RED);
+                xuat(node->data);
+                SET_COLOR(WHITE);
+            }
+            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            thoiGianTimKiem = duration.count();
+            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            system("pause");
+        }
+
+        if (lc == "3")
         {
             backToSearchMenu = true;
-            break;
-        }
-
-        default:
-            break;
         }
     }
 }
 
-void giaiPhongBoNhoDSLKVong(LIST_VONG& listVong)
+void giaiPhongBoNhoDSLKVong(LIST_VONG &listVong)
 {
     if (listVong.pTail_Vong != NULL)
     {
@@ -833,9 +1000,9 @@ void giaiPhongBoNhoDSLKVong(LIST_VONG& listVong)
     }
 }
 
-void timKiemSinhVienDanhSachLkVong(LIST_VONG& listVong)
+void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
 {
-    int lc;
+    string lc;
     bool backToMainMenu = false;
     while (!backToMainMenu)
     {
@@ -851,11 +1018,15 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG& listVong)
         cout << "\n\t  0. Thoat.";
         cout << "\n\t======================= END =======================";
         cout << "\n\n\t - Nhap lua chon: ";
-        cin >> lc;
-
-        switch (lc)
+        getline(cin, lc);
+        regex pattern("[0-9]|10");
+        while (!regex_match(lc, pattern))
         {
-        case 1:
+            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            getline(cin, lc);
+        }
+
+        if (lc == "1")
         {
             cin.ignore();
             cout << "\n\tNhap ma sinh vien can tim : ";
@@ -863,79 +1034,50 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG& listVong)
             getline(cin, mssvCanTim);
             formMssv(mssvCanTim);
 
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-
             luaChonXuatTenDaoNguocDSLKVong(listVong, "maSV", mssvCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 2:
+        if (lc == "2")
         {
             cin.ignore();
             cout << "\n\tNhap ho sinh vien can tim : ";
             string hoCanTim = "";
             getline(cin, hoCanTim);
             formChu(hoCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
             luaChonXuatTenDaoNguocDSLKVong(listVong, "ho", hoCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 3:
+        if (lc == "3")
         {
             cin.ignore();
             cout << "\n\tNhap ten sinh vien can tim : ";
             string tenCanTim = "";
             getline(cin, tenCanTim);
             formChu(tenCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
             luaChonXuatTenDaoNguocDSLKVong(listVong, "ten", tenCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 4:
+        if (lc == "4")
         {
             cin.ignore();
             cout << "\n\tNhap lop sinh vien can tim : ";
             string lopCanTim = "";
             getline(cin, lopCanTim);
             formMssv(lopCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
             luaChonXuatTenDaoNguocDSLKVong(listVong, "lop", lopCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 5:
+        if (lc == "5")
         {
             cout << "\n\tNhap diem sinh vien can tim : ";
             float diemCanTim;
@@ -943,126 +1085,213 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG& listVong)
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
             luaChonXuatTenDaoNguocDSLKVong(listVong, "diem", tam);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 10:
+        if (lc == "10")
         {
             backToMainMenu = true;
-            break;
         }
 
-        case 0:
+        if (lc == "0")
         {
             giaiPhongBoNhoDSLKVong(listVong);
             cout << "\n\t == KET THUC CHUONG TRINH ==\n";
             exit(0);
         }
-        }
     }
 }
 
 //--------- dslk kép
-void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP& listKep, const string& field, const string& value)
+// void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP &listKep, const string &field, const string &value)
+// {
+//     string lc;
+//     bool backToSearchMenu = false;
+
+//     while (!backToSearchMenu)
+//     {
+//         system("cls"); // Xóa màn hình
+//         cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
+//         cout << "\n\t  1. YES";
+//         cout << "\n\t  2. NO";
+//         cout << "\n\t  3. Quay lai menu tim kiem";
+//         cout << "\n\t - Nhap lua chon: ";
+//         getline(cin, lc);
+//         regex pattern("[0-9]");
+//         while (!regex_match(lc, pattern))
+//         {
+//             cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+//             getline(cin, lc);
+//         }
+//         if (lc == "1")
+//         {
+//             inTieuDe();
+//             node_Kep *p = listKep.pHead_Kep;                   // Truy cập vào phần đầu danh sách liên kết kép
+//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+//             while (p != NULL)
+//             {
+//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
+//                 {
+//                     string reversedName = TenDaoNguoc(p->data.ten);
+//                     string reversedHo = TenDaoNguoc(p->data.ho);
+//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
+//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
+//                 {
+//                     string reversedName = TenDaoNguoc(p->data.ten);
+//                     string reversedHo = TenDaoNguoc(p->data.ho);
+//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+
+//                 p = p->pNext_Kep;
+//             }
+
+//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+//             int tgianTimKiem = duration.count();
+//             cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+//             system("pause");
+//         }
+
+//         if (lc == "2")
+//         {
+//             inTieuDe();
+//             node_Kep *p = listKep.pHead_Kep;                   // Truy cập vào phần đầu danh sách liên kết kép
+//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+//             while (p != NULL)
+//             {
+//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
+//                 {
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
+//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
+//                 {
+
+//                     SET_COLOR(RED);
+//                     xuat(p->data);
+//                     SET_COLOR(WHITE);
+//                 }
+
+//                 p = p->pNext_Kep;
+//             }
+//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+//             int tgianTimKiem = duration.count();
+//             cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
+//             system("pause");
+//         }
+
+//         if (lc == "3")
+//         {
+//             backToSearchMenu = true;
+//         }
+//     }
+// }
+void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP &listKep, const string &field, const string &value)
 {
-    int lc;
+    string lc;
     bool backToSearchMenu = false;
+    vector<node_Kep *> foundNodes;
+    int thoiGianTimKiem;
+    node_Kep *p = listKep.pHead_Kep;
+
+    while (p != NULL)
+    {
+        if ((field == "ho" && getValue(p->data, field).find(value) == 0) ||
+            (field != "ho" && getValue(p->data, field) == value))
+        {
+            foundNodes.push_back(p);
+        }
+        p = p->pNext_Kep;
+    }
+
+    if (foundNodes.empty())
+    {
+        cout << "\n\tKhong tim thay ...\n"
+             << endl;
+
+        return;
+    }
 
     while (!backToSearchMenu)
     {
-        system("cls"); // Xóa màn hình
+        system("cls");
         cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
         cout << "\n\t  1. YES";
         cout << "\n\t  2. NO";
         cout << "\n\t  3. Quay lai menu tim kiem";
         cout << "\n\t - Nhap lua chon: ";
-        cin >> lc;
 
-        switch (lc)
+        getline(cin, lc);
+        regex pattern("[0-9]");
+        while (!regex_match(lc, pattern))
         {
-        case 1:
-        {
-            inTieuDe();
-            node_Kep* p = listKep.pHead_Kep; // Truy cập vào phần đầu danh sách liên kết kép
-            while (p != NULL)
-            {
-                if (field == "ho" && getValue(p->data, field).find(value) == 0)
-                {
-                    string reversedName = TenDaoNguoc(p->data.ten);
-                    string reversedHo = TenDaoNguoc(p->data.ho);
-                    cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-                // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-                else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-                {
-                    string reversedName = TenDaoNguoc(p->data.ten);
-                    string reversedHo = TenDaoNguoc(p->data.ho);
-                    cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-
-                p = p->pNext_Kep;
-            }
-            system("pause");
-            break;
+            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+            getline(cin, lc);
         }
 
-        case 2:
+        if (lc == "1")
         {
             inTieuDe();
-            node_Kep* p = listKep.pHead_Kep; // Truy cập vào phần đầu danh sách liên kết kép
-            while (p != NULL)
+            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+            for (auto node : foundNodes)
             {
-                if (field == "ho" && getValue(p->data, field).find(value) == 0)
-                {
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-                // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-                else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-                {
-
-                    SET_COLOR(RED);
-                    xuat(p->data);
-                    SET_COLOR(WHITE);
-                }
-
-                p = p->pNext_Kep;
+                string reversedName = TenDaoNguoc(node->data.ten);
+                string reversedHo = TenDaoNguoc(node->data.ho);
+                cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
+                SET_COLOR(RED);
+                xuat(node->data);
+                SET_COLOR(WHITE);
             }
+
+            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            thoiGianTimKiem = duration.count();
+            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
             system("pause");
-            break;
         }
 
-        case 3:
+        if (lc == "2")
+        {
+            inTieuDe();
+            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
+
+            for (auto node : foundNodes)
+            {
+                SET_COLOR(RED);
+                xuat(node->data);
+                SET_COLOR(WHITE);
+            }
+            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
+            thoiGianTimKiem = duration.count();
+            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            system("pause");
+        }
+
+        if (lc == "3")
         {
             backToSearchMenu = true;
-            break;
-        }
-
-        default:
-            cout << "\nLua chon khong hop le. Vui long nhap lai.";
-            system("pause");
-            break;
         }
     }
 }
 
-void giaiPhongBoNhoDSLKKep(LIST_KEP& listKep)
+void giaiPhongBoNhoDSLKKep(LIST_KEP &listKep)
 {
     pNODE_KEP p = listKep.pHead_Kep;
     while (p != NULL)
@@ -1074,9 +1303,9 @@ void giaiPhongBoNhoDSLKKep(LIST_KEP& listKep)
     listKep.pHead_Kep = listKep.pTail_Kep = NULL; // Đảm bảo danh sách đã được giải phóng
 }
 
-void timKiemSinhVienDanhSachLKKep(LIST_KEP& listKep)
+void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
 {
-    int lc;
+    string lc;
     bool backToMainMenu = false;
     while (!backToMainMenu)
     {
@@ -1092,11 +1321,15 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP& listKep)
         cout << "\n\t  0. Thoat.";
         cout << "\n\t======================= END =======================";
         cout << "\n\n\t - Nhap lua chon: ";
-        cin >> lc;
-
-        switch (lc)
+        getline(cin, lc);
+        regex pattern("[0-9]|10");
+        while (!regex_match(lc, pattern))
         {
-        case 1:
+            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            getline(cin, lc);
+        }
+
+        if (lc == "1")
         {
             cin.ignore();
             cout << "\n\tNhap ma sinh vien can tim : ";
@@ -1104,79 +1337,50 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP& listKep)
             getline(cin, mssvCanTim);
             formMssv(mssvCanTim);
 
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-
             luaChonXuatTenDaoNguocDSLKKep(listKep, "maSV", mssvCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 2:
+        if (lc == "2")
         {
             cin.ignore();
             cout << "\n\tNhap ho sinh vien can tim : ";
             string hoCanTim = "";
             getline(cin, hoCanTim);
             formChu(hoCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
             luaChonXuatTenDaoNguocDSLKKep(listKep, "ho", hoCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 3:
+        if (lc == "3")
         {
             cin.ignore();
             cout << "\n\tNhap ten sinh vien can tim : ";
             string tenCanTim = "";
             getline(cin, tenCanTim);
             formChu(tenCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
             luaChonXuatTenDaoNguocDSLKKep(listKep, "ten", tenCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 4:
+        if (lc == "4")
         {
             cin.ignore();
             cout << "\n\tNhap lop sinh vien can tim : ";
             string lopCanTim = "";
             getline(cin, lopCanTim);
             formMssv(lopCanTim);
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
 
             luaChonXuatTenDaoNguocDSLKKep(listKep, "lop", lopCanTim);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 5:
+        if (lc == "5")
         {
             cout << "\n\tNhap diem sinh vien can tim : ";
             float diemCanTim;
@@ -1184,30 +1388,21 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP& listKep)
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();
-            auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
             luaChonXuatTenDaoNguocDSLKKep(listKep, "diem", tam);
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-            auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-            int tgianTimKiem = duration.count();
-            cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
             system("pause");
-            break;
         }
 
-        case 10:
+        if (lc == "10")
         {
             backToMainMenu = true;
-            break;
         }
 
-        case 0:
+        if (lc == "0")
         {
             giaiPhongBoNhoDSLKKep(listKep);
             cout << "\n\t == KET THUC CHUONG TRINH ==\n";
             exit(0);
-        }
         }
     }
 }

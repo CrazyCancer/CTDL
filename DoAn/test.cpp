@@ -8,6 +8,11 @@
 #include "xoa.h"
 #include "lietKe_TinhDiem.h"
 #include "TimKiem.h"
+#include "selectionSort.h"
+#include "insertionSort.h"
+#include "quickSort.h"
+#include "mergeSort.h"
+#include "heapSort.h"
 
 void menuChoMang(SV listMang[], int &soLuongSinhVien)
 {
