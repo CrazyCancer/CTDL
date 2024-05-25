@@ -2,7 +2,6 @@
 #define CYAN 11
 #define WHITE 15
 #define RED 4
-
 // ------------------------------------
 
 // Hàm đổi màu chữ
