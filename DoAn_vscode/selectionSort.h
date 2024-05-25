@@ -1,3 +1,4 @@
+
 void selectionSortMang(SV LIST_MANG[], int tieuChi)
 {
     int vitrimin;
@@ -5,11 +6,11 @@ void selectionSortMang(SV LIST_MANG[], int tieuChi)
     if (tieuChi == 1)
     {
         string min;
-        for (i = 0; i < n - 1; i++)
+        for (i = 0; i < soLuong - 1; i++)
         {
             min = LIST_MANG[i].maSV;
             vitrimin = i;
-            for (j = i + 1; j < n; j++)
+            for (j = i + 1; j < soLuong; j++)
                 if (cmpStr(LIST_MANG[j].maSV, min) < 0)
                 {
                     min = LIST_MANG[j].maSV;
@@ -24,11 +25,11 @@ void selectionSortMang(SV LIST_MANG[], int tieuChi)
     if (tieuChi == 2)
     {
         string min;
-        for (i = 0; i < n - 1; i++)
+        for (i = 0; i < soLuong - 1; i++)
         {
             min = LIST_MANG[i].ten;
             vitrimin = i;
-            for (j = i + 1; j < n; j++)
+            for (j = i + 1; j < soLuong; j++)
                 if (cmpStr(LIST_MANG[j].ten, min) < 0)
                 {
                     min = LIST_MANG[j].ten;
@@ -43,11 +44,11 @@ void selectionSortMang(SV LIST_MANG[], int tieuChi)
     if (tieuChi == 3)
     {
         int min;
-        for (i = 0; i < n - 1; i++)
+        for (i = 0; i < soLuong - 1; i++)
         {
             min = LIST_MANG[i].diem;
             vitrimin = i;
-            for (j = i + 1; j < n; j++)
+            for (j = i + 1; j < soLuong; j++)
                 if (LIST_MANG[j].diem < min)
                 {
                     min = LIST_MANG[j].diem;
@@ -62,7 +63,7 @@ void selectionSortMang(SV LIST_MANG[], int tieuChi)
 }
 void selectionSortSinglyLinked(LIST_DON &ds, int tieuChi)
 {
-    pNODE_DON p, q, pMin;
+    pNODE_DON p, q, pMin = nullptr;
     if (tieuChi == 1)
     {
         string min;
@@ -126,7 +127,7 @@ void selectionSortSinglyLinked(LIST_DON &ds, int tieuChi)
 }
 void selectionSortDoubleLinked(LIST_KEP &ds, int tieuChi)
 {
-    pNODE_KEP p, q, pMin;
+    pNODE_KEP p, q, pMin = nullptr;
     if (tieuChi == 1)
     {
         string min;
@@ -188,9 +189,10 @@ void selectionSortDoubleLinked(LIST_KEP &ds, int tieuChi)
         ds.pHead_Kep = pMin;
     }
 }
+
 void selectionSortCircalLinked(LIST_VONG &ds, int tieuChi)
 {
-    pNODE_VONG q, p, pMin;
+    pNODE_VONG q, p, pMin = nullptr;
     pNODE_VONG Last = ds.pTail_Vong->pNext_Vong;
     if (tieuChi == 1)
     {

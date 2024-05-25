@@ -1,117 +1,3 @@
-int cmpStr(string s1, string s2)
-{
-    return strcmp(s1.c_str(), s2.c_str());
-}
-
-// Clear linked list
-void themVaoCuoiDon(LIST_DON &list, pNODE_DON p)
-{
-    if (list.pHead_Don == NULL)
-    {
-        list.pHead_Don = p;
-    }
-    else
-    {
-        pNODE_DON temp = list.pHead_Don;
-        while (temp->pNext_Don != NULL)
-        {
-            temp = temp->pNext_Don;
-        }
-        temp->pNext_Don = p;
-    }
-}
-
-void themVaoCuoiVong(LIST_VONG &list, pNODE_VONG p)
-{
-    // Danh sach rong
-    if (list.pTail_Vong == NULL)
-    {
-        list.pTail_Vong = p;
-        p->pNext_Vong = p; // Khi danh sách rỗng, pNext của phần tử đầu tiên trỏ lại chính nó
-    }
-    else
-    {
-        p->pNext_Vong = list.pTail_Vong->pNext_Vong; // Liên kết phần tử mới với phần tử đầu tiên
-        list.pTail_Vong->pNext_Vong = p;             // Liên kết phần tử cuối cùng với phần tử mới
-        list.pTail_Vong = p;                         // Cập nhật pTail để trỏ đến phần tử mới
-    }
-}
-
-// Ham them vao cuoi danh sach lien ket kep
-void themVaoCuoiKep(LIST_KEP &list, pNODE_KEP p)
-{
-    // Danh sach rong
-    if (list.pHead_Kep == NULL)
-    {
-        list.pHead_Kep = list.pTail_Kep = p;
-    }
-    else
-    {
-        list.pTail_Kep->pNext_Kep = p;
-        p->pPrev_Kep = list.pTail_Kep;
-        list.pTail_Kep = p;
-    }
-}
-void clearSinglyLinkedList(pNODE_DON &First)
-{
-    pNODE_DON p;
-    while (First != NULL)
-    {
-        p = First;
-        First = p->pNext_Don;
-        delete p;
-    }
-}
-
-void clearCircularLinkedList(pNODE_VONG &Last)
-{
-    while (Last != NULL)
-    {
-        pNODE_VONG p = Last->pNext_Vong;
-        if (p == Last)
-            Last = NULL;
-        else
-            Last->pNext_Vong = p->pNext_Vong;
-        delete p;
-    }
-}
-
-void clearDoublyLinkedList(pNODE_KEP &First)
-{
-    pNODE_KEP p;
-    while (First != NULL)
-    {
-        p = First;
-        if (First->pNext_Kep == NULL)
-            First = NULL;
-        else
-        {
-            First = p->pNext_Kep;
-            First->pPrev_Kep = NULL;
-        }
-        delete p;
-    }
-}
-
-// Convert to linked list
-void convertToSinglyLinkedList(LIST_DON &dsDon, SV a[])
-{
-    khoitaoDSLKDon(dsDon);
-    for (int i = 0; i < n; i++)
-        themVaoCuoiDon(dsDon, khoiTaoNodeDon(a[i]));
-}
-
-void convertToDoublyLinkedList(LIST_KEP &dsKep, SV a[])
-{
-    for (int i = 0; i < n; i++)
-        themVaoCuoiKep(dsKep, khoiTaoNodeKep(a[i]));
-}
-
-void convertToCircularLinkedList(LIST_VONG &dsVong, SV a[])
-{
-    for (int i = 0; i < n; i++)
-        themVaoCuoiVong(dsVong, khoiTaoNodeVong(a[i]));
-}
 // #MergeSort dslk đơn
 void mergeSinglyLinkedListPointer(vector<pNODE_DON> &linkedListPointer, int left, int mid, int right, int tieuChi)
 {
@@ -363,9 +249,9 @@ void mergeSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
 
         mergeSortSinglyLinkedList(linkedListPointer, 0, n - 1, tieuChi);
 
-        khoitaoDSLKDon(dsDon);
+        khoitaoDSLKDon();
         for (int i = 0; i < n; i++)
-            themVaoCuoiDon(dsDon, khoiTaoNodeDon(linkedListPointer[i]->data));
+            themVaoCuoiDSLKDon(dsDon, khoiTaoNodeDon(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();
@@ -384,7 +270,7 @@ void mergeSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
         mergeSortCircularLinkedList(linkedListPointer, 0, n - 1, tieuChi);
         khoiTaoDSLKVong(listVong);
         for (int i = 0; i < n; i++)
-            themVaoCuoiVong(listVong, khoiTaoNodeVong(linkedListPointer[i]->data));
+            themVaoCuoiDSLKVong(listVong, khoiTaoNodeVong(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();
@@ -403,7 +289,7 @@ void mergeSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
 
         khoiTaoDSLKKep(listKep);
         for (int i = 0; i < n; i++)
-            themVaoCuoiKep(listKep, khoiTaoNodeKep(linkedListPointer[i]->data));
+            themVaoCuoiDSLKKep(listKep, khoiTaoNodeKep(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();
@@ -415,16 +301,16 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
     size = 1;
     if (tieuChi == 1)
     {
-        while (size < n)
+        while (size < soLuong)
         {
             string dstam[MAX];
             low1 = 0;
             k = 0;
-            while (low1 + size < n)
+            while (low1 + size < soLuong)
             {
                 up1 = low1 + size - 1;
                 low2 = up1 + 1;
-                up2 = (low2 + size - 1 < n) ? low2 + size - 1 : n - 1;
+                up2 = (low2 + size - 1 < soLuong) ? low2 + size - 1 : soLuong - 1;
                 for (i = low1, j = low2; i <= up1 && j <= up2; k++)
                     if (LIST_MANG[i].maSV <= LIST_MANG[j].maSV)
                         dstam[k] = LIST_MANG[i++].maSV;
@@ -436,25 +322,25 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
                     dstam[k] = LIST_MANG[j++].maSV;
                 low1 = up2 + 1;
             }
-            for (i = low1; k < n; i++)
+            for (i = low1; k < soLuong; i++)
                 dstam[k++] = LIST_MANG[i].maSV;
-            for (i = 0; i < n; i++) // gan nguoc tra lai cho A
+            for (i = 0; i < soLuong; i++) // gan nguoc tra lai cho A
                 LIST_MANG[i].maSV = dstam[i];
             size *= 2;
         }
     }
     if (tieuChi == 2)
     {
-        while (size < n)
+        while (size < soLuong)
         {
             string dstam[MAX];
             low1 = 0;
             k = 0;
-            while (low1 + size < n)
+            while (low1 + size < soLuong)
             {
                 up1 = low1 + size - 1;
                 low2 = up1 + 1;
-                up2 = (low2 + size - 1 < n) ? low2 + size - 1 : n - 1;
+                up2 = (low2 + size - 1 < soLuong) ? low2 + size - 1 : soLuong - 1;
                 for (i = low1, j = low2; i <= up1 && j <= up2; k++)
                     if (LIST_MANG[i].ten <= LIST_MANG[j].ten)
                         dstam[k] = LIST_MANG[i++].ten;
@@ -466,25 +352,25 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
                     dstam[k] = LIST_MANG[j++].ten;
                 low1 = up2 + 1;
             }
-            for (i = low1; k < n; i++)
+            for (i = low1; k < soLuong; i++)
                 dstam[k++] = LIST_MANG[i].ten;
-            for (i = 0; i < n; i++) // gan nguoc tra lai cho A
+            for (i = 0; i < soLuong; i++) // gan nguoc tra lai cho A
                 LIST_MANG[i].ten = dstam[i];
             size *= 2;
         }
     }
     if (tieuChi == 3)
     {
-        while (size < n)
+        while (size < soLuong)
         {
             int dstam[MAX];
             low1 = 0;
             k = 0;
-            while (low1 + size < n)
+            while (low1 + size < soLuong)
             {
                 up1 = low1 + size - 1;
                 low2 = up1 + 1;
-                up2 = (low2 + size - 1 < n) ? low2 + size - 1 : n - 1;
+                up2 = (low2 + size - 1 < soLuong) ? low2 + size - 1 : soLuong - 1;
                 for (i = low1, j = low2; i <= up1 && j <= up2; k++)
                     if (LIST_MANG[i].diem <= LIST_MANG[j].diem)
                         dstam[k] = LIST_MANG[i++].diem;
@@ -496,9 +382,9 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
                     dstam[k] = LIST_MANG[j++].diem;
                 low1 = up2 + 1;
             }
-            for (i = low1; k < n; i++)
+            for (i = low1; k < soLuong; i++)
                 dstam[k++] = LIST_MANG[i].diem;
-            for (i = 0; i < n; i++) // gan nguoc tra lai cho A
+            for (i = 0; i < soLuong; i++) // gan nguoc tra lai cho A
                 LIST_MANG[i].diem = dstam[i];
             size *= 2;
         }

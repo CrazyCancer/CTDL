@@ -1,56 +1,3 @@
-void themVaoCuoiDon(LIST_DON &list, pNODE_DON p)
-{
-    if (list.pHead_Don == NULL)
-    {
-        list.pHead_Don = p;
-    }
-    else
-    {
-        pNODE_DON temp = list.pHead_Don;
-        while (temp->pNext_Don != NULL)
-        {
-            temp = temp->pNext_Don;
-        }
-        temp->pNext_Don = p;
-    }
-}
-
-void themVaoCuoiVong(LIST_VONG &list, pNODE_VONG p)
-{
-    // Danh sach rong
-    if (list.pTail_Vong == NULL)
-    {
-        list.pTail_Vong = p;
-        p->pNext_Vong = p; // Khi danh sách rỗng, pNext của phần tử đầu tiên trỏ lại chính nó
-    }
-    else
-    {
-        p->pNext_Vong = list.pTail_Vong->pNext_Vong; // Liên kết phần tử mới với phần tử đầu tiên
-        list.pTail_Vong->pNext_Vong = p;             // Liên kết phần tử cuối cùng với phần tử mới
-        list.pTail_Vong = p;                         // Cập nhật pTail để trỏ đến phần tử mới
-    }
-}
-
-// Ham them vao cuoi danh sach lien ket kep
-void themVaoCuoiKep(LIST_KEP &list, pNODE_KEP p)
-{
-    // Danh sach rong
-    if (list.pHead_Kep == NULL)
-    {
-        list.pHead_Kep = list.pTail_Kep = p;
-    }
-    else
-    {
-        list.pTail_Kep->pNext_Kep = p;
-        p->pPrev_Kep = list.pTail_Kep;
-        list.pTail_Kep = p;
-    }
-}
-
-int cmpStr(string s1, string s2)
-{
-    return strcmp(s1.c_str(), s2.c_str());
-}
 
 void quickSortArray(SV LIST_MANG[], int u, int v, int tieuChi)
 {
@@ -236,9 +183,9 @@ void quickSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
 
         quicksortSinglyLinkedList(linkedListPointer, 0, n - 1, tieuChi);
 
-        khoitaoDSLKDon(dsDon);
+        khoitaoDSLKDon();
         for (int i = 0; i < n; i++)
-            themVaoCuoiDon(dsDon, khoiTaoNodeDon(linkedListPointer[i]->data));
+            themVaoCuoiDSLKDon(dsDon, khoiTaoNodeDon(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();
@@ -257,7 +204,7 @@ void quickSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
         quicksortCircularLinkedList(linkedListPointer, 0, n - 1, tieuChi);
         khoiTaoDSLKVong(listVong);
         for (int i = 0; i < n; i++)
-            themVaoCuoiVong(listVong, khoiTaoNodeVong(linkedListPointer[i]->data));
+            themVaoCuoiDSLKVong(listVong, khoiTaoNodeVong(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();
@@ -276,7 +223,7 @@ void quickSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
 
         khoiTaoDSLKKep(listKep);
         for (int i = 0; i < n; i++)
-            themVaoCuoiKep(listKep, khoiTaoNodeKep(linkedListPointer[i]->data));
+            themVaoCuoiDSLKKep(listKep, khoiTaoNodeKep(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();

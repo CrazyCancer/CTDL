@@ -8,11 +8,14 @@
 #include "xoa.h"
 #include "lietKe_TinhDiem.h"
 #include "TimKiem.h"
-// #include "selectionSort.h"
-// #include "insertionSort.h"
-// #include "quickSort.h"
-// #include "mergeSort.h"
-// #include "heapSort.h"
+#include "lua_chon_sap_xep.h"
+#include "stringCompare.h"
+#include "selectionSort.h"
+#include "insertionSort.h"
+#include "quickSort.h"
+#include "mergeSort.h"
+#include "heapSort.h"
+#include "bubbleSort.h"
 
 void menuChoMang(SV listMang[], int &soLuongSinhVien)
 {
@@ -87,6 +90,55 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
         {
 
             cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBMang(LIST_MANG, soLuongSinhVien) << endl;
+        }
+
+        if (luaChon == "8")
+        {
+            system("cls");
+            int arrangeType, tieuChi;
+            printSortMenu(arrangeType, tieuChi);
+            if (arrangeType == 1)
+            {
+                clock_t start = clock();
+				bubbleSortArray(LIST_MANG, tieuChi);
+				clock_t end = clock();
+				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 2)
+            {
+                clock_t start = clock();
+				quickSortArray(LIST_MANG, 0, soLuongSinhVien - 1, tieuChi);
+				clock_t end = clock();
+				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 3)
+            {
+                clock_t start = clock();
+				heapSortArray(LIST_MANG, soLuongSinhVien, tieuChi);
+				clock_t end = clock();
+				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 4)
+            {
+                clock_t start = clock();
+				mergeSortArray(LIST_MANG, tieuChi);
+				clock_t end = clock();
+				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 5)
+            {
+                clock_t start = clock();
+				insertionSortMang(LIST_MANG, tieuChi);
+				clock_t end = clock();
+				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 6)
+            {
+                clock_t start = clock();
+				selectionSortMang(LIST_MANG, tieuChi);
+				clock_t end = clock();
+				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
         }
 
         if (luaChon == "9")
@@ -176,6 +228,55 @@ void menuChoDSLKDon()
             cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKDon(listDon) << endl;
         }
 
+        if (luaChon == "8")
+        {
+            system("cls");
+            int arrangeType, tieuChi;
+            printSortMenu(arrangeType, tieuChi);
+            if (arrangeType == 1)
+            {
+                clock_t start = clock();
+                bubbleSortSinglyLinkedList(listDon, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 2)
+            {
+                clock_t start = clock();
+                quickSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 3)
+            {
+                clock_t start = clock();
+                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 4)
+            {
+                clock_t start = clock();
+                mergeSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 5)
+            {
+                clock_t start = clock();
+                insertionSortSinglyLinkedList(listDon, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 6)
+            {
+                clock_t start = clock();
+                selectionSortSinglyLinked(listDon, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+        }
+
         if (luaChon == "10")
         {
             cin.ignore();
@@ -260,6 +361,55 @@ void menuChoDSLKVong(LIST_VONG listVong)
         if (luaChon == "7")
         {
             cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKVong(listVong) << endl;
+        }
+
+        if (luaChon == "8")
+        {
+            system("cls");
+            int arrangeType, tieuChi;
+            printSortMenu(arrangeType, tieuChi);
+            if (arrangeType == 1)
+            {
+                clock_t start = clock();
+                bubbleSortDoublyLinkedList(listKep, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 2)
+            {
+                clock_t start = clock();
+                quickSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 3)
+            {
+                clock_t start = clock();
+                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 4)
+            {
+                clock_t start = clock();
+                mergeSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 5)
+            {
+                clock_t start = clock();
+                insertionSortCircularLinkedList(listVong, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 6)
+            {
+                clock_t start = clock();
+                selectionSortCircalLinked(listVong, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
         }
 
         if (luaChon == "10")
@@ -347,6 +497,55 @@ void menuChoDSLKKep(LIST_KEP listKep)
         if (luaChon == "7")
         {
             cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKKep(listKep) << endl;
+        }
+
+        if (luaChon == "8")
+        {
+            system("cls");
+            int arrangeType, tieuChi;
+            printSortMenu(arrangeType, tieuChi);
+            if (arrangeType == 1)
+            {
+                clock_t start = clock();
+                bubbleSortCircularLinkedList(listVong, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 2)
+            {
+                clock_t start = clock();
+                quickSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 3)
+            {
+                clock_t start = clock();
+                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 4)
+            {
+                clock_t start = clock();
+                mergeSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 5)
+            {
+                clock_t start = clock();
+                insertionSortDoubleLinkedList(listKep, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
+            if (arrangeType == 6)
+            {
+                clock_t start = clock();
+                selectionSortDoubleLinked(listKep, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+            }
         }
 
         if (luaChon == "10")

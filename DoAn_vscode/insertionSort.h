@@ -1,14 +1,11 @@
-int cmpStr(string s1, string s2)
-{
-    return strcmp(s1.c_str(), s2.c_str());
-}
-void inertionSortMang(SV LIST_MANG[], int tieuchi)
+
+void insertionSortMang(SV LIST_MANG[], int tieuchi)
 {
     if (tieuchi == 1)
     {
         string x;
         int i, j;
-        for (i = 1; i < n; i++)
+        for (i = 1; i < soLuong; i++)
         {
             x = LIST_MANG[i].maSV;
             for (j = i - 1; j >= 0 && cmpStr(x, LIST_MANG[j].maSV) < 0; j--)
@@ -20,7 +17,7 @@ void inertionSortMang(SV LIST_MANG[], int tieuchi)
     {
         string x;
         int i, j;
-        for (i = 1; i < n; i++)
+        for (i = 1; i < soLuong; i++)
         {
             x = LIST_MANG[i].ten;
             for (j = i - 1; j >= 0 && cmpStr(x, LIST_MANG[j].maSV) < 0; j--)
@@ -32,7 +29,7 @@ void inertionSortMang(SV LIST_MANG[], int tieuchi)
     {
         int x;
         int i, j;
-        for (i = 1; i < n; i++)
+        for (i = 1; i < soLuong; i++)
         {
             x = LIST_MANG[i].diem;
             for (j = i - 1; j >= 0 && x < LIST_MANG[j].diem; j--)

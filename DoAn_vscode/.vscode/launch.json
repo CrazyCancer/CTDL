@@ -8,7 +8,7 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "f:/code/CTDLGT/DoAn",
+      "cwd": "E:/code/CTDLGT/Do_An/DoAn_vscode",
       "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
       "preLaunchTask": "C/C++: g++.exe build active file",
       "MIMode": "gdb",

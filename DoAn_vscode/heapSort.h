@@ -1,116 +1,21 @@
-// Clear linked list
-void clearSinglyLinkedList(pNODE_DON &First)
-{
-    pNODE_DON p;
-    while (First != NULL)
-    {
-        p = First;
-        First = p->pNext_Don;
-        delete p;
-    }
-}
-
-void clearCircularLinkedList(pNODE_VONG &Last)
-{
-    while (Last != NULL)
-    {
-        pNODE_VONG p = Last->pNext_Vong;
-        if (p == Last)
-            Last = NULL;
-        else
-            Last->pNext_Vong = p->pNext_Vong;
-        delete p;
-    }
-}
-
-void clearDoublyLinkedList(pNODE_KEP &First)
-{
-    pNODE_KEP p;
-    while (First != NULL)
-    {
-        p = First;
-        if (First->pNext_Kep == NULL)
-            First = NULL;
-        else
-        {
-            First = p->pNext_Kep;
-            First->pPrev_Kep = NULL;
-        }
-        delete p;
-    }
-}
-void themVaoCuoiDon(LIST_DON &list, pNODE_DON p)
-{
-    if (list.pHead_Don == NULL)
-    {
-        list.pHead_Don = p;
-    }
-    else
-    {
-        pNODE_DON temp = list.pHead_Don;
-        while (temp->pNext_Don != NULL)
-        {
-            temp = temp->pNext_Don;
-        }
-        temp->pNext_Don = p;
-    }
-}
-
-void themVaoCuoiVong(LIST_VONG &list, pNODE_VONG p)
-{
-    // Danh sach rong
-    if (list.pTail_Vong == NULL)
-    {
-        list.pTail_Vong = p;
-        p->pNext_Vong = p; // Khi danh sách rỗng, pNext của phần tử đầu tiên trỏ lại chính nó
-    }
-    else
-    {
-        p->pNext_Vong = list.pTail_Vong->pNext_Vong; // Liên kết phần tử mới với phần tử đầu tiên
-        list.pTail_Vong->pNext_Vong = p;             // Liên kết phần tử cuối cùng với phần tử mới
-        list.pTail_Vong = p;                         // Cập nhật pTail để trỏ đến phần tử mới
-    }
-}
-
-// Ham them vao cuoi danh sach lien ket kep
-void themVaoCuoiKep(LIST_KEP &list, pNODE_KEP p)
-{
-    // Danh sach rong
-    if (list.pHead_Kep == NULL)
-    {
-        list.pHead_Kep = list.pTail_Kep = p;
-    }
-    else
-    {
-        list.pTail_Kep->pNext_Kep = p;
-        p->pPrev_Kep = list.pTail_Kep;
-        list.pTail_Kep = p;
-    }
-}
-
-int cmpStr(string s1, string s2)
-{
-    return strcmp(s1.c_str(), s2.c_str());
-}
-
 // Convert to linked list
 void convertToSinglyLinkedList(LIST_DON &dsDon, SV a[])
 {
-    khoitaoDSLKDon(dsDon);
-    for (int i = 0; i < n; i++)
-        themVaoCuoiDon(dsDon, khoiTaoNodeDon(a[i]));
+    khoitaoDSLKDon();
+    for (int i = 0; i < soLuong; i++)
+        themVaoCuoiDSLKDon(dsDon, khoiTaoNodeDon(a[i]));
 }
 
 void convertToDoublyLinkedList(LIST_KEP &dsKep, SV a[])
 {
-    for (int i = 0; i < n; i++)
-        themVaoCuoiKep(dsKep, khoiTaoNodeKep(a[i]));
+    for (int i = 0; i < soLuong; i++)
+        themVaoCuoiDSLKKep(dsKep, khoiTaoNodeKep(a[i]));
 }
 
 void convertToCircularLinkedList(LIST_VONG &dsVong, SV a[])
 {
-    for (int i = 0; i < n; i++)
-        themVaoCuoiVong(dsVong, khoiTaoNodeVong(a[i]));
+    for (int i = 0; i < soLuong; i++)
+        themVaoCuoiDSLKVong(dsVong, khoiTaoNodeVong(a[i]));
 }
 
 // HeapSort
@@ -176,7 +81,7 @@ void heapSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, SV 
             k++;
             i = i->pNext_Don;
         }
-        clearSinglyLinkedList(dsDon.pHead_Don);
+        giaiPhongBoNhoDSLKDon(dsDon);
     }
     if (kieuDL == 3)
     {
@@ -189,7 +94,7 @@ void heapSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, SV 
             p = p->pNext_Vong;
         }
         a[n - 1] = p->data;
-        clearCircularLinkedList(dsVong.pTail_Vong);
+        giaiPhongBoNhoDSLKVong(dsVong);
     }
     if (kieuDL == 4)
     {
@@ -201,7 +106,7 @@ void heapSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, SV 
             k++;
             i = i->pNext_Kep;
         }
-        clearDoublyLinkedList(dsKep.pHead_Kep);
+        giaiPhongBoNhoDSLKKep(dsKep);
     }
     heapSortArray(a, n, tieuChi);
     if (kieuDL == 2)
