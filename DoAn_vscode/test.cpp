@@ -38,7 +38,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
         cout << "\n\t   0. Thoát";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
         regex pattern("[0-9]");
@@ -65,7 +65,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
         {
             cout << "\n\t   3. Thêm mới sinh viên\n\n";
             themSinhVienMang(listMang, soLuongSinhVien, soLuongSinhVien);
-            cout << "\n\tTHEM THANH CONG !!!\n\n";
+            cout << "\n\tTHÊM THÀNH CÔNG !!!\n\n";
         }
 
         if (luaChon == "4")
@@ -73,7 +73,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
             // cin.ignore();
             cout << "\n\t   4. Xóa sinh viên\n\n";
             xoaSVMang(LIST_MANG, soLuongSinhVien);
-            cout << "\n\tXOA THANH CONG !!!\n\n";
+            cout << "\n\tXÓA THÀNH CÔNG !!!\n\n";
         }
 
         if (luaChon == "5")
@@ -89,7 +89,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
         if (luaChon == "7")
         {
 
-            cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBMang(LIST_MANG, soLuongSinhVien) << endl;
+            cout << "\n\t-- Điểm Trung Bình của các sinh viên: " << diemTBMang(LIST_MANG, soLuongSinhVien) << endl;
         }
 
         if (luaChon == "8")
@@ -149,7 +149,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
 
         if (luaChon == "0")
         {
-            cout << "\n\t == KET THUC CHUONG TRINH ==\n";
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             cin.ignore();
             exit(0);
         }
@@ -164,7 +164,7 @@ void menuChoDSLKDon()
     while (!backToMainMenu)
     {
         system("cls");
-        cout << "\n\n\t\t=== CHUONG TRINH QUAN LY SINH VIEN BANG DANH SACH LIEN KET DON ===\n\n";
+        cout << "\n\n\t\t=== CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN BẰNG LIÊN KẾT ĐƠN ===\n\n";
         cout << "\t======================= MENU =======================";
         cout << "\n\t   1. Xuất danh sách sinh viên";
         cout << "\n\t   2. Tìm kiếm sinh viên";
@@ -178,7 +178,7 @@ void menuChoDSLKDon()
         cout << "\n\t   0. Thoát";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
         regex pattern("[0-9]|10");
@@ -201,16 +201,16 @@ void menuChoDSLKDon()
 
         if (luaChon == "3")
         {
-            cout << "- Them sinh vien tiep theo: ";
+            cout << "- Thêm sinh viên tiếp theo: ";
             themSVVaoCuoiDSLKDon(listDon, nhapThongTinSinhVien(2));
-            cout << "\n\tTHEM THANH CONG !!!\n\n";
+            cout << "\n\tTHÊM THÀNH CÔNG !!!\n\n";
         }
 
         if (luaChon == "4")
         {
             cout << "\n\t   4. Xóa sinh viên\n\n";
             xoaSVDSLKDon(listDon);
-            cout << "\n\tXOA THANH CONG !!!\n\n";
+            cout << "\n\tXÓA THÀNH CÔNG!!!\n\n";
         }
 
         if (luaChon == "5")
@@ -225,7 +225,7 @@ void menuChoDSLKDon()
 
         if (luaChon == "7")
         {
-            cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKDon(listDon) << endl;
+            cout << "\n\t-- Điểm Trung Bình của các sinh viên: " << diemTBDSLKDon(listDon) << endl;
         }
 
         if (luaChon == "8")
@@ -285,7 +285,7 @@ void menuChoDSLKDon()
         if (luaChon == "0")
         {
             giaiPhongBoNhoDSLKDon(listDon);
-            cout << "\n\t == KET THUC CHUONG TRINH ==\n";
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
         system("pause");
@@ -299,7 +299,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
     while (!backToMainMenu)
     {
         system("cls");
-        cout << "\n\n\t\t=== CHUONG TRINH QUAN LY SINH VIEN BANG DANH SACH LIEN KET VONG ===\n\n";
+        cout << "\n\n\t\t=== CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN BẰNG DANH SÁCH LIÊN KẾT VÒNG ===\n\n";
         cout << "\t======================= MENU =======================";
         cout << "\n\t   1. Xuất danh sách sinh viên";
         cout << "\n\t   2. Tìm kiếm sinh viên";
@@ -313,7 +313,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
         cout << "\n\t   0. Thoát";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
         regex pattern("[0-9]|10");
@@ -336,16 +336,16 @@ void menuChoDSLKVong(LIST_VONG listVong)
 
         if (luaChon == "3")
         {
-            cout << "- Them sinh vien tiep theo: ";
+            cout << "- Thêm sinh viên tiếp theo: ";
             themSVVaoCuoiDSLKVong(listVong, nhapThongTinSinhVien(3));
-            cout << "\n\tTHEM THANH CONG !!!\n\n";
+            cout << "\n\tTHÊM THÀNH CÔNG !!!\n\n";
         }
 
         if (luaChon == "4")
         {
             cout << "\n\t   4. Xóa sinh viên\n\n";
             xoaSVDSLKVong(listVong);
-            cout << "\n\tXOA THANH CONG !!!\n\n";
+            cout << "\n\tXÓA THÀNH CÔNG !!!\n\n";
         }
 
         if (luaChon == "5")
@@ -360,7 +360,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
 
         if (luaChon == "7")
         {
-            cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKVong(listVong) << endl;
+            cout << "\n\t-- Điểm Trung Bình của các sinh viên: " << diemTBDSLKVong(listVong) << endl;
         }
 
         if (luaChon == "8")
@@ -420,7 +420,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
         if (luaChon == "0")
         {
             giaiPhongBoNhoDSLKVong(listVong);
-            cout << "\n\t == KET THUC CHUONG TRINH ==\n";
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
         system("pause");
@@ -434,7 +434,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
     while (!backToMainMenu)
     {
         system("cls");
-        cout << "\n\n\t\t=== CHUONG TRINH QUAN LY SINH VIEN BANG DANH SACH LIEN KET KEP ===\n\n";
+        cout << "\n\n\t\t=== CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN BẰNG DANH SÁCH LIÊN KẾT KÉP ===\n\n";
         cout << "\t======================= MENU =======================";
         cout << "\n\t   1. Xuất danh sách sinh viên";
         cout << "\n\t   2. Tìm kiếm sinh viên";
@@ -448,7 +448,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
         cout << "\n\t   0. Thoát";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
         regex pattern("[0-9]|10");
@@ -471,9 +471,9 @@ void menuChoDSLKKep(LIST_KEP listKep)
 
         if (luaChon == "3")
         {
-            cout << "- Them sinh vien tiep theo: ";
+            cout << "- Thêm sinh viên tiếp theo: ";
             themSVVaoCuoiDSLKKep(listKep, nhapThongTinSinhVien(4));
-            cout << "\n\tTHEM THANH CONG !!!\n\n";
+            cout << "\n\tTHÊM THÀNH CÔNG !!!\n\n";
         }
 
         if (luaChon == "4")
@@ -481,7 +481,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
             cin.ignore();
             cout << "\n\t   4. Xóa sinh viên\n\n";
             xoaSVDSLKKep(listKep);
-            cout << "\n\tXOA THANH CONG !!!\n\n";
+            cout << "\n\tXÓA THÀNH CÔNG !!!\n\n";
         }
 
         if (luaChon == "5")
@@ -496,7 +496,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
 
         if (luaChon == "7")
         {
-            cout << "\n\t-- Diem Trung Binh cua cac sinh vien: " << diemTBDSLKKep(listKep) << endl;
+            cout << "\n\t-- Điểm Trung Bình của các sinh viên: " << diemTBDSLKKep(listKep) << endl;
         }
 
         if (luaChon == "8")
@@ -556,7 +556,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
         if (luaChon == "0")
         {
             giaiPhongBoNhoDSLKKep(listKep);
-            cout << "\n\t == KET THUC CHUONG TRINH ==\n";
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
         system("pause");
@@ -569,7 +569,7 @@ static void mainMenu()
     while (true)
     {
         system("cls");
-        cout << "\n\n\t\t=== CHUONG TRINH QUAN LY SINH VIEN ===\n\n";
+        cout << "\n\n\t\t=== CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN ===\n\n";
         cout << "\t======================= MENU =======================";
         cout << "\n\t   1. Lưu trữ bằng danh sách mảng";
         cout << "\n\t   2. Lưu trữ bằng danh sách liên kết đơn";
@@ -577,7 +577,7 @@ static void mainMenu()
         cout << "\n\t   4. Lưu trữ bằng danh sách liên kết kép";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
         regex pattern("[1-4]");
