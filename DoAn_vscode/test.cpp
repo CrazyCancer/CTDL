@@ -413,7 +413,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
         {
             break;
         }
-        
+
         if (luaChon == "0")
         {
             giaiPhongBoNhoDSLKVong(listVong);
@@ -571,15 +571,16 @@ static void mainMenu()
         cout << "\n\t   2. Lưu trữ bằng danh sách liên kết đơn";
         cout << "\n\t   3. Lưu trữ bằng danh sách liên kết vòng";
         cout << "\n\t   4. Lưu trữ bằng danh sách liên kết kép";
+        cout << "\n\t   0. Thoát";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
-        regex pattern("[1-4]");
+        regex pattern("[0-4]");
         while (!regex_match(luaChon, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 1 -> 4 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 0 -> 4 để chọn: ";
             getline(cin, luaChon);
         }
 
@@ -616,6 +617,13 @@ static void mainMenu()
 
             nhapKep(listKep);
             menuChoDSLKKep(listKep);
+        }
+
+        if (luaChon == "0")
+        {
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
+            system("pause");
+            exit(0);
         }
     }
 }
