@@ -20,8 +20,7 @@
 void menuChoMang(SV listMang[], int &soLuongSinhVien)
 {
     string luaChon;
-    bool backToMainMenu = false;
-    while (!backToMainMenu)
+    while (true)
     {
         system("cls");
         cout << "\n\n\t\t=== CHUONG TRINH QUAN LY SINH VIEN BANG DANH SACH MANG ===\n\n";
@@ -160,8 +159,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
 void menuChoDSLKDon()
 {
     string luaChon;
-    bool backToMainMenu = false;
-    while (!backToMainMenu)
+    while (true)
     {
         system("cls");
         cout << "\n\n\t\t=== CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN BẰNG LIÊN KẾT ĐƠN ===\n\n";
@@ -174,17 +172,17 @@ void menuChoDSLKDon()
         cout << "\n\t   6. Liệt kê các sinh viên có điểm cao nhất";
         cout << "\n\t   7. Tính điểm trung bình của lớp";
         cout << "\n\t   8. Sắp xếp danh sách sinh viên";
-        cout << "\n\t   10. Quay lai";
+        cout << "\n\t   9. Quay lai";
         cout << "\n\t   0. Thoát";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
-        regex pattern("[0-9]|10");
+        regex pattern("[0-9]");
         while (!regex_match(luaChon, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
             getline(cin, luaChon);
         }
 
@@ -277,7 +275,7 @@ void menuChoDSLKDon()
             }
         }
 
-        if (luaChon == "10")
+        if (luaChon == "9")
         {
             cin.ignore();
             break;
@@ -295,8 +293,7 @@ void menuChoDSLKDon()
 void menuChoDSLKVong(LIST_VONG listVong)
 {
     string luaChon;
-    bool backToMainMenu = false;
-    while (!backToMainMenu)
+    while (true)
     {
         system("cls");
         cout << "\n\n\t\t=== CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN BẰNG DANH SÁCH LIÊN KẾT VÒNG ===\n\n";
@@ -309,17 +306,17 @@ void menuChoDSLKVong(LIST_VONG listVong)
         cout << "\n\t   6. Liệt kê các sinh viên có điểm cao nhất";
         cout << "\n\t   7. Tính điểm trung bình của lớp";
         cout << "\n\t   8. Sắp xếp danh sách sinh viên";
-        cout << "\n\t   10. Quay lai";
+        cout << "\n\t   9. Quay lai";
         cout << "\n\t   0. Thoát";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
-        regex pattern("[0-9]|10");
+        regex pattern("[0-9]");
         while (!regex_match(luaChon, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
             getline(cin, luaChon);
         }
 
@@ -412,11 +409,11 @@ void menuChoDSLKVong(LIST_VONG listVong)
             }
         }
 
-        if (luaChon == "10")
+        if (luaChon == "9")
         {
-            backToMainMenu = true;
             break;
         }
+        
         if (luaChon == "0")
         {
             giaiPhongBoNhoDSLKVong(listVong);
@@ -430,8 +427,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
 void menuChoDSLKKep(LIST_KEP listKep)
 {
     string luaChon;
-    bool backToMainMenu = false;
-    while (!backToMainMenu)
+    while (true)
     {
         system("cls");
         cout << "\n\n\t\t=== CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN BẰNG DANH SÁCH LIÊN KẾT KÉP ===\n\n";
@@ -444,17 +440,17 @@ void menuChoDSLKKep(LIST_KEP listKep)
         cout << "\n\t   6. Liệt kê các sinh viên có điểm cao nhất";
         cout << "\n\t   7. Tính điểm trung bình của lớp";
         cout << "\n\t   8. Sắp xếp danh sách sinh viên";
-        cout << "\n\t   10. Quay lai";
+        cout << "\n\t   9. Quay lai";
         cout << "\n\t   0. Thoát";
         cout << "\n\t======================= END =======================";
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
 
-        regex pattern("[0-9]|10");
+        regex pattern("[0-9]");
         while (!regex_match(luaChon, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
             getline(cin, luaChon);
         }
 
@@ -548,7 +544,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
             }
         }
 
-        if (luaChon == "10")
+        if (luaChon == "9")
         {
             cin.ignore();
             break;

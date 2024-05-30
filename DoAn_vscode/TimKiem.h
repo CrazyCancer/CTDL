@@ -159,17 +159,17 @@ void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int &soLuongSinhVien, const vect
     while (!backToSearchMenu)      // Thực hiện trong khi người dùng không muốn quay lại menu tìm kiếm
     {
         system("cls");
-        cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
+        cout << "\tĐã tìm thấy thông tin sinh viên. Bạn có muốn xuất tên đảo ngược không?";
         cout << "\n\t  1. YES";
         cout << "\n\t  2. NO";
-        cout << "\n\t  3. Quay lai menu tim kiem";
-        cout << "\n\t - Nhap lua chon: ";
+        cout << "\n\t  3. Quay lại menu tìm kiếm";
+        cout << "\n\t - Nhập lựa chọn: ";
 
         getline(cin, lc);
-        regex pattern("[0-9]");
+        regex pattern("[1-3]");
         while (!regex_match(lc, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 1 -> 3 để chọn: ";
             getline(cin, lc);
         }
         if (lc == "1")
@@ -197,7 +197,7 @@ void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int &soLuongSinhVien, const vect
                 }
             }
 
-            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            cout << "\n\t--------Thời gian tìm kiếm-------: " << thoiGianTimKiem << endl;
             system("pause");
         }
 
@@ -220,7 +220,7 @@ void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int &soLuongSinhVien, const vect
                     SET_COLOR(WHITE); // Thay WHITE bằng mã màu mặc định của bạn
                 }
             }
-            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            cout << "\n\t--------Thời gian tìm kiếm-------: " << thoiGianTimKiem << endl;
 
             system("pause");
         }
@@ -241,22 +241,22 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
     while (!backToMenu)
     {
         system("cls");
-        cout << "\n\n\t\t=== CHUONG TRINH TIM KIEM SINH VIEN ===\n\n";
+        cout << "\n\n\t\t=== CHƯƠNG TRÌNH TÌM KIẾM SINH VIÊN ===\n\n";
         cout << "\t======================= MENU =======================";
-        cout << "\n\t  1. Tim theo ma sinh vien.";
-        cout << "\n\t  2. Tim theo ho.";
-        cout << "\n\t  3. Tim theo ten.";
-        cout << "\n\t  4. Tim theo lop.";
-        cout << "\n\t  5. Tim theo diem.";
-        cout << "\n\t  10. Quay lai.";
-        cout << "\n\t  0. Thoat.";
+        cout << "\n\t  1. Tìm theo mã sinh viên.";
+        cout << "\n\t  2. Tìm theo họ.";
+        cout << "\n\t  3. Tìm theo tên.";
+        cout << "\n\t  4. Tìm theo lớp.";
+        cout << "\n\t  5. Tìm theo điểm.";
+        cout << "\n\t  6. Quay lại.";
+        cout << "\n\t  0. Thoát.";
         cout << "\n\t======================= END =======================";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, lc);
-        regex pattern("[0-9]|10");
+        regex pattern("[0-6]");
         while (!regex_match(lc, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 0 -> 6 để chọn: ";
             getline(cin, lc);
         }
 
@@ -264,7 +264,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
         {
             cin.ignore();
             int index = 0;
-            cout << "\n\tNhap ma sinh vien can tim : ";
+            cout << "\n\tNhập mã sinh viên cần tìm : ";
             string mssvCanTim = "";
             getline(cin, mssvCanTim);
             formMssv(mssvCanTim);
@@ -289,7 +289,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
             }
             else
             {
-                cout << "\n\tKhong tim thay ...\n"
+                cout << "\n\tKhông tìm thấy ...\n"
                      << endl;
             }
 
@@ -300,7 +300,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
         {
             cin.ignore();
             int index = 0;
-            cout << "\n\tNhap ho sinh vien can tim : ";
+            cout << "\n\tNhập họ sinh viên cần tìm : ";
             string hoCanTim = "";
             getline(cin, hoCanTim);
             formChu(hoCanTim);
@@ -325,7 +325,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
             }
             else
             {
-                cout << "\n\tKhong tim thay ...\n"
+                cout << "\n\tKhông tìm thấy ...\n"
                      << endl;
             }
 
@@ -336,7 +336,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
         {
             cin.ignore();
             int index = 0;
-            cout << "\n\tNhap ten sinh vien can tim : ";
+            cout << "\n\tNhập tên sinh viên cần tìm : ";
             string tenCanTim = "";
             getline(cin, tenCanTim);
             formChu(tenCanTim);
@@ -369,7 +369,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
             }
             else
             {
-                cout << "\n\tKhong tim thay ...\n"
+                cout << "\n\tKhông tìm thấy ...\n"
                      << endl;
             }
 
@@ -380,7 +380,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
         {
             cin.ignore();
             int index = 0;
-            cout << "\n\tNhap lop sinh vien can tim : ";
+            cout << "\n\tNhập lớp sinh viên cần tìm : ";
             string lopCanTim = "";
             getline(cin, lopCanTim);
             formMssv(lopCanTim);
@@ -412,7 +412,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
             }
             else
             {
-                cout << "\n\tKhong tim thay ...\n"
+                cout << "\n\tKhông tìm thấy ...\n"
                      << endl;
             }
 
@@ -422,7 +422,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
         if (lc == "5")
         {
             int index = 0;
-            cout << "\n\tNhap diem sinh vien can tim : ";
+            cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
             cin >> diemCanTim;
 
@@ -455,123 +455,18 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
             system("pause");
         }
 
-        if (lc == "10")
+        if (lc == "6")
         {
             backToMenu = true;
         }
 
         if (lc == "0")
         {
-            cout << "\n\t == KET THUC CHUONG TRINH ==\n";
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
     }
 }
-
-//--------- dslk đơn
-// void luaChonXuatTenDaoNguocDSLKDon(const string &field, const string &value)
-// {
-//     string lc;
-//     bool backToSearchMenu = false;
-
-//     while (!backToSearchMenu)
-//     {
-//         system("cls"); // Xóa màn hình
-//         cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
-//         cout << "\n\t  1. YES";
-//         cout << "\n\t  2. NO";
-//         cout << "\n\t  3. Quay lai menu tim kiem";
-//         cout << "\n\t - Nhap lua chon: ";
-
-//         getline(cin, lc);
-//         regex pattern("[0-9]");
-//         while (!regex_match(lc, pattern))
-//         {
-//             cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
-//             getline(cin, lc);
-//         }
-
-//         if (lc == "1")
-//         {
-//             inTieuDe();
-//             node_Don *p = NULL;
-
-//             p = listDon.pHead_Don;
-//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-//             while (p != NULL)
-//             {
-
-//                 // Kiểm tra nếu trường đang tìm kiếm là "ho" và giá trị của "ho" bắt đầu bằng giá trị tìm kiếm
-//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
-//                 {
-//                     string reversedName = TenDaoNguoc(p->data.ten);
-//                     string reversedHo = TenDaoNguoc(p->data.ho);
-//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-//                 {
-//                     string reversedName = TenDaoNguoc(p->data.ten);
-//                     string reversedHo = TenDaoNguoc(p->data.ho);
-//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-
-//                 p = p->pNext_Don;
-//             }
-//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-//             int tgianTimKiem = duration.count();
-//             cout << "\n\t--------Thoi gian tim kiem-------: " << tgianTimKiem << endl;
-//             system("pause");
-//         }
-
-//         if (lc == "2")
-//         {
-//             inTieuDe();
-//             node_Don *p = NULL;
-
-//             p = listDon.pHead_Don;
-//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-//             while (p != NULL)
-//             {
-
-//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
-//                 {
-
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-//                 {
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-
-//                 p = p->pNext_Don;
-//             }
-//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-//             int tgianTimKiem = duration.count();
-//             cout << "\n\t--------Thoi gian tim kiem-------: " << tgianTimKiem << endl;
-
-//             system("pause");
-//         }
-
-//         if (lc == "3")
-//         {
-//             backToSearchMenu = true;
-//         }
-//     }
-// }
 
 void luaChonXuatTenDaoNguocDSLKDon(LIST_DON &listDon, const string &field, const string &value)
 {
@@ -592,7 +487,7 @@ void luaChonXuatTenDaoNguocDSLKDon(LIST_DON &listDon, const string &field, const
 
     if (foundNodes.empty())
     {
-        cout << "\n\tKhong tim thay ...\n"
+        cout << "\n\tKhông tìm thấy ...\n"
              << endl;
 
         return;
@@ -601,17 +496,17 @@ void luaChonXuatTenDaoNguocDSLKDon(LIST_DON &listDon, const string &field, const
     while (!backToSearchMenu)
     {
         system("cls"); // Xóa màn hình
-        cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
+        cout << "\tĐã tìm thấy thông tin sinh viên. Bạn có muốn xuất tên đảo ngược không?";
         cout << "\n\t  1. YES";
         cout << "\n\t  2. NO";
-        cout << "\n\t  3. Quay lai menu tim kiem";
-        cout << "\n\t - Nhap lua chon: ";
+        cout << "\n\t  3. Quay lại menu tìm kiếm";
+        cout << "\n\t - Nhập lựa chọn: ";
 
         getline(cin, lc);
-        regex pattern("[0-9]");
+        regex pattern("[1-3]");
         while (!regex_match(lc, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 1 -> 3 để chọn: ";
             getline(cin, lc);
         }
 
@@ -633,7 +528,7 @@ void luaChonXuatTenDaoNguocDSLKDon(LIST_DON &listDon, const string &field, const
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
             thoiGianTimKiem = duration.count();
-            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            cout << "\n\t--------Thời gian tìm kiếm-------: " << thoiGianTimKiem << endl;
             system("pause");
         }
 
@@ -651,7 +546,7 @@ void luaChonXuatTenDaoNguocDSLKDon(LIST_DON &listDon, const string &field, const
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
             thoiGianTimKiem = duration.count();
-            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            cout << "\n\t--------Thời gian tìm kiếm-------: " << thoiGianTimKiem << endl;
             system("pause");
         }
 
@@ -681,29 +576,29 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
     while (!backToMainMenu)
     {
         system("cls");
-        cout << "\n\n\t\t=== CHUONG TRINH TIM KIEM SINH VIEN ===\n\n";
+        cout << "\n\n\t\t=== CHƯƠNG TRÌNH TÌM KIẾM SINH VIÊN ===\n\n";
         cout << "\t======================= MENU =======================";
-        cout << "\n\t  1. Tim theo ma sinh vien.";
-        cout << "\n\t  2. Tim theo ho.";
-        cout << "\n\t  3. Tim theo ten.";
-        cout << "\n\t  4. Tim theo lop.";
-        cout << "\n\t  5. Tim theo diem.";
-        cout << "\n\t  10. Quay lai.";
-        cout << "\n\t  0. Thoat.";
+        cout << "\n\t  1. Tìm theo mã sinh viên.";
+        cout << "\n\t  2. Tìm theo họ.";
+        cout << "\n\t  3. Tìm theo tên.";
+        cout << "\n\t  4. Tìm theo lớp.";
+        cout << "\n\t  5. Tìm theo điểm.";
+        cout << "\n\t  6. Quay lại.";
+        cout << "\n\t  0. Thoát.";
         cout << "\n\t======================= END =======================";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, lc);
-        regex pattern("[0-9]|10");
+        regex pattern("[0-6]");
         while (!regex_match(lc, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 0 -> 6 để chọn: ";
             getline(cin, lc);
         }
 
         if (lc == "1")
         {
             cin.ignore();
-            cout << "\n\tNhap ma sinh vien can tim : ";
+            cout << "\n\tNhập mã sinh viên cần tìm : ";
             string mssvCanTim = "";
             getline(cin, mssvCanTim);
             formMssv(mssvCanTim);
@@ -716,7 +611,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
         if (lc == "2")
         {
             cin.ignore();
-            cout << "\n\tNhap ho sinh vien can tim : ";
+            cout << "\n\tNhập họ sinh viên cần tìm : ";
             string hoCanTim = "";
             getline(cin, hoCanTim);
             formChu(hoCanTim);
@@ -729,7 +624,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
         if (lc == "3")
         {
             cin.ignore();
-            cout << "\n\tNhap ten sinh vien can tim : ";
+            cout << "\n\tNhập tên sinh viên cần tìm : ";
             string tenCanTim = "";
             getline(cin, tenCanTim);
             formChu(tenCanTim);
@@ -742,7 +637,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
         if (lc == "4")
         {
             cin.ignore();
-            cout << "\n\tNhap lop sinh vien can tim : ";
+            cout << "\n\tNhập lớp sinh viên cần tìm : ";
             string lopCanTim = "";
             getline(cin, lopCanTim);
             formMssv(lopCanTim);
@@ -754,7 +649,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
 
         if (lc == "5")
         {
-            cout << "\n\tNhap diem sinh vien can tim : ";
+            cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
             cin >> diemCanTim;
             ostringstream convert;
@@ -765,7 +660,7 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
             system("pause");
         }
 
-        if (lc == "10")
+        if (lc == "6")
         {
             backToMainMenu = true;
         }
@@ -773,122 +668,11 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
         if (lc == "0")
         {
             giaiPhongBoNhoDSLKDon(listDon);
-            cout << "\n\t == KET THUC CHUONG TRINH ==\n";
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
     }
 }
-
-//--------- dslk vòng
-// void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG &listVong, const string &field, const string &value)
-// {
-//     string lc;
-//     bool backToSearchMenu = false;
-
-//     while (!backToSearchMenu)
-//     {
-//         system("cls"); // Xóa màn hình
-//         cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
-//         cout << "\n\t  1. YES";
-//         cout << "\n\t  2. NO";
-//         cout << "\n\t  3. Quay lai menu tim kiem";
-//         cout << "\n\t - Nhap lua chon: ";
-//         getline(cin, lc);
-//         regex pattern("[0-9]");
-//         while (!regex_match(lc, pattern))
-//         {
-//             cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
-//             getline(cin, lc);
-//         }
-
-//         if (lc == "1")
-//         {
-//             inTieuDe();
-//             node_Vong *p = NULL;
-//             p = listVong.pTail_Vong;
-//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-
-//             do
-//             {
-
-//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
-//                 {
-//                     string reversedName = TenDaoNguoc(p->data.ten);
-//                     string reversedHo = TenDaoNguoc(p->data.ho);
-//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-//                 {
-//                     string reversedName = TenDaoNguoc(p->data.ten);
-//                     string reversedHo = TenDaoNguoc(p->data.ho);
-//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-
-//                 p = p->pNext_Vong;
-//             } while (p != listVong.pTail_Vong);
-//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-//             int tgianTimKiem = duration.count();
-//             cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
-//             system("pause");
-//         }
-
-//         if (lc == "2")
-//         {
-//             inTieuDe();
-//             node_Vong *p = NULL;
-//             p = listVong.pTail_Vong;
-//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-
-//             do
-//             {
-//                 // if (getValue(p->data, field) == value)
-//                 //{
-//                 //     SET_COLOR(RED);
-//                 //     xuat(p->data);
-//                 //     SET_COLOR(WHITE); // Thay WHITE bằng mã màu mặc định của bạn
-//                 // }
-
-//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
-//                 {
-
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-//                 {
-
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-
-//                 p = p->pNext_Vong;
-//             } while (p != listVong.pTail_Vong);
-//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-//             int tgianTimKiem = duration.count();
-//             cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-
-//             system("pause");
-//         }
-
-//         if (lc == "3")
-//         {
-//             backToSearchMenu = true;
-//         }
-//     }
-// }
 
 void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG &listVong, const string &field, const string &value)
 {
@@ -913,7 +697,7 @@ void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG &listVong, const string &field, co
 
     if (foundNodes.empty())
     {
-        cout << "\n\tKhong tim thay ...\n"
+        cout << "\n\tKhông tìm thấy ...\n"
              << endl;
 
         return;
@@ -922,17 +706,17 @@ void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG &listVong, const string &field, co
     while (!backToSearchMenu)
     {
         system("cls");
-        cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
+        cout << "\tĐã tìm thấy thông tin sinh viên. Bạn có muốn xuất tên đảo ngược không?";
         cout << "\n\t  1. YES";
         cout << "\n\t  2. NO";
-        cout << "\n\t  3. Quay lai menu tim kiem";
-        cout << "\n\t - Nhap lua chon: ";
+        cout << "\n\t  3. Quay lại menu tìm kiếm";
+        cout << "\n\t - Nhập lựa chọn: ";
 
         getline(cin, lc);
-        regex pattern("[0-9]");
+        regex pattern("[1-3]");
         while (!regex_match(lc, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 1 -> 3 để chọn: ";
             getline(cin, lc);
         }
 
@@ -954,7 +738,7 @@ void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG &listVong, const string &field, co
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
             thoiGianTimKiem = duration.count();
-            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            cout << "\n\t--------Thời gian tìm kiếm-------: " << thoiGianTimKiem << endl;
             system("pause");
         }
 
@@ -972,7 +756,7 @@ void luaChonXuatTenDaoNguocDSLKVong(LIST_VONG &listVong, const string &field, co
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
             thoiGianTimKiem = duration.count();
-            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            cout << "\n\t--------Thời gian tìm kiếm-------: " << thoiGianTimKiem << endl;
             system("pause");
         }
 
@@ -1006,29 +790,29 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
     while (!backToMainMenu)
     {
         system("cls");
-        cout << "\n\n\t\t=== CHUONG TRINH TIM KIEM SINH VIEN ===\n\n";
+        cout << "\n\n\t\t=== CHƯƠNG TRÌNH TÌM KIẾM SINH VIÊN ===\n\n";
         cout << "\t======================= MENU =======================";
-        cout << "\n\t  1. Tim theo ma sinh vien.";
-        cout << "\n\t  2. Tim theo ho.";
-        cout << "\n\t  3. Tim theo ten.";
-        cout << "\n\t  4. Tim theo lop.";
-        cout << "\n\t  5. Tim theo diem.";
-        cout << "\n\t  10. Quay lai.";
-        cout << "\n\t  0. Thoat.";
+        cout << "\n\t  1. Tìm theo mã sinh viên.";
+        cout << "\n\t  2. Tìm theo họ.";
+        cout << "\n\t  3. Tìm theo tên.";
+        cout << "\n\t  4. Tìm theo lớp.";
+        cout << "\n\t  5. Tìm theo điểm.";
+        cout << "\n\t  6. Quay lại.";
+        cout << "\n\t  0. Thoát.";
         cout << "\n\t======================= END =======================";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, lc);
-        regex pattern("[0-9]|10");
+        regex pattern("[0-6]");
         while (!regex_match(lc, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 0 -> 6 để chọn: ";
             getline(cin, lc);
         }
 
         if (lc == "1")
         {
             cin.ignore();
-            cout << "\n\tNhap ma sinh vien can tim : ";
+            cout << "\n\tNhập mã sinh viên cần tìm : ";
             string mssvCanTim = "";
             getline(cin, mssvCanTim);
             formMssv(mssvCanTim);
@@ -1041,7 +825,7 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
         if (lc == "2")
         {
             cin.ignore();
-            cout << "\n\tNhap ho sinh vien can tim : ";
+            cout << "\n\tNhập họ sinh viên cần tìm : ";
             string hoCanTim = "";
             getline(cin, hoCanTim);
             formChu(hoCanTim);
@@ -1054,7 +838,7 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
         if (lc == "3")
         {
             cin.ignore();
-            cout << "\n\tNhap ten sinh vien can tim : ";
+            cout << "\n\tNhập tên sinh viên cần tìm : ";
             string tenCanTim = "";
             getline(cin, tenCanTim);
             formChu(tenCanTim);
@@ -1066,7 +850,7 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
         if (lc == "4")
         {
             cin.ignore();
-            cout << "\n\tNhap lop sinh vien can tim : ";
+            cout << "\n\tNhập lớp sinh viên cần tìm : ";
             string lopCanTim = "";
             getline(cin, lopCanTim);
             formMssv(lopCanTim);
@@ -1078,7 +862,7 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
 
         if (lc == "5")
         {
-            cout << "\n\tNhap diem sinh vien can tim : ";
+            cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
             cin >> diemCanTim;
             ostringstream convert;
@@ -1089,7 +873,7 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
             system("pause");
         }
 
-        if (lc == "10")
+        if (lc == "6")
         {
             backToMainMenu = true;
         }
@@ -1097,109 +881,12 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
         if (lc == "0")
         {
             giaiPhongBoNhoDSLKVong(listVong);
-            cout << "\n\t == KET THUC CHUONG TRINH ==\n";
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
     }
 }
 
-//--------- dslk kép
-// void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP &listKep, const string &field, const string &value)
-// {
-//     string lc;
-//     bool backToSearchMenu = false;
-
-//     while (!backToSearchMenu)
-//     {
-//         system("cls"); // Xóa màn hình
-//         cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
-//         cout << "\n\t  1. YES";
-//         cout << "\n\t  2. NO";
-//         cout << "\n\t  3. Quay lai menu tim kiem";
-//         cout << "\n\t - Nhap lua chon: ";
-//         getline(cin, lc);
-//         regex pattern("[0-9]");
-//         while (!regex_match(lc, pattern))
-//         {
-//             cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
-//             getline(cin, lc);
-//         }
-//         if (lc == "1")
-//         {
-//             inTieuDe();
-//             node_Kep *p = listKep.pHead_Kep;                   // Truy cập vào phần đầu danh sách liên kết kép
-//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-
-//             while (p != NULL)
-//             {
-//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
-//                 {
-//                     string reversedName = TenDaoNguoc(p->data.ten);
-//                     string reversedHo = TenDaoNguoc(p->data.ho);
-//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-//                 {
-//                     string reversedName = TenDaoNguoc(p->data.ten);
-//                     string reversedHo = TenDaoNguoc(p->data.ho);
-//                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-
-//                 p = p->pNext_Kep;
-//             }
-
-//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-//             int tgianTimKiem = duration.count();
-//             cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-//             system("pause");
-//         }
-
-//         if (lc == "2")
-//         {
-//             inTieuDe();
-//             node_Kep *p = listKep.pHead_Kep;                   // Truy cập vào phần đầu danh sách liên kết kép
-//             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-
-//             while (p != NULL)
-//             {
-//                 if (field == "ho" && getValue(p->data, field).find(value) == 0)
-//                 {
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-//                 // Kiểm tra nếu trường đang tìm kiếm không phải là "ho" và giá trị khớp với giá trị tìm kiếm
-//                 else if (field != "ho" && getValue(p->data, field).find(value) != std::string::npos)
-//                 {
-
-//                     SET_COLOR(RED);
-//                     xuat(p->data);
-//                     SET_COLOR(WHITE);
-//                 }
-
-//                 p = p->pNext_Kep;
-//             }
-//             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
-//             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
-//             int tgianTimKiem = duration.count();
-//             cout << "\n\t\nTHOI GIAN TIM KIEM : " << tgianTimKiem << endl;
-//             system("pause");
-//         }
-
-//         if (lc == "3")
-//         {
-//             backToSearchMenu = true;
-//         }
-//     }
-// }
 void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP &listKep, const string &field, const string &value)
 {
     string lc;
@@ -1220,7 +907,7 @@ void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP &listKep, const string &field, const
 
     if (foundNodes.empty())
     {
-        cout << "\n\tKhong tim thay ...\n"
+        cout << "\n\tKhông tìm thấy ...\n"
              << endl;
 
         return;
@@ -1229,17 +916,17 @@ void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP &listKep, const string &field, const
     while (!backToSearchMenu)
     {
         system("cls");
-        cout << "\tDa tim thay thong tin sinh vien. Ban co muon xuat ten dao nguoc khong?";
+        cout << "\tĐã tìm thấy thông tin sinh viên. Bạn có muốn xuất tên đảo ngược không?";
         cout << "\n\t  1. YES";
         cout << "\n\t  2. NO";
-        cout << "\n\t  3. Quay lai menu tim kiem";
-        cout << "\n\t - Nhap lua chon: ";
+        cout << "\n\t  3. Quay lại menu tìm kiếm";
+        cout << "\n\t - Nhập lựa chọn: ";
 
         getline(cin, lc);
-        regex pattern("[0-9]");
+        regex pattern("[1-3]");
         while (!regex_match(lc, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 9 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 1 -> 3 để chọn: ";
             getline(cin, lc);
         }
 
@@ -1261,7 +948,7 @@ void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP &listKep, const string &field, const
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
             thoiGianTimKiem = duration.count();
-            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            cout << "\n\t--------Thời gian tìm kiếm-------: " << thoiGianTimKiem << endl;
             system("pause");
         }
 
@@ -1279,7 +966,7 @@ void luaChonXuatTenDaoNguocDSLKKep(LIST_KEP &listKep, const string &field, const
             auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Tính thời gian
             thoiGianTimKiem = duration.count();
-            cout << "\n\t--------Thoi gian tim kiem-------: " << thoiGianTimKiem << endl;
+            cout << "\n\t--------Thời gian tìm kiếm-------: " << thoiGianTimKiem << endl;
             system("pause");
         }
 
@@ -1309,29 +996,29 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
     while (!backToMainMenu)
     {
         system("cls");
-        cout << "\n\n\t\t=== CHUONG TRINH TIM KIEM SINH VIEN ===\n\n";
+        cout << "\n\n\t\t=== CHƯƠNG TRÌNH TÌM KIẾM SINH VIÊN ===\n\n";
         cout << "\t======================= MENU =======================";
-        cout << "\n\t  1. Tim theo ma sinh vien.";
-        cout << "\n\t  2. Tim theo ho.";
-        cout << "\n\t  3. Tim theo ten.";
-        cout << "\n\t  4. Tim theo lop.";
-        cout << "\n\t  5. Tim theo diem.";
-        cout << "\n\t  10. Quay lai.";
-        cout << "\n\t  0. Thoat.";
+        cout << "\n\t  1. Tìm theo mã sinh viên.";
+        cout << "\n\t  2. Tìm theo họ.";
+        cout << "\n\t  3. Tìm theo tên.";
+        cout << "\n\t  4. Tìm theo lớp.";
+        cout << "\n\t  5. Tìm theo điểm.";
+        cout << "\n\t  6. Quay lại.";
+        cout << "\n\t  0. Thoát.";
         cout << "\n\t======================= END =======================";
-        cout << "\n\n\t - Nhap lua chon: ";
+        cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, lc);
-        regex pattern("[0-9]|10");
+        regex pattern("[0-6]");
         while (!regex_match(lc, pattern))
         {
-            cout << "\n Chỉ nhập các số từ 0 -> 10 để chọn: ";
+            cout << "\n Chỉ nhập các số từ 0 -> 6 để chọn: ";
             getline(cin, lc);
         }
 
         if (lc == "1")
         {
             cin.ignore();
-            cout << "\n\tNhap ma sinh vien can tim : ";
+            cout << "\n\tNhập mã sinh viên cần tìm : ";
             string mssvCanTim = "";
             getline(cin, mssvCanTim);
             formMssv(mssvCanTim);
@@ -1344,7 +1031,7 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
         if (lc == "2")
         {
             cin.ignore();
-            cout << "\n\tNhap ho sinh vien can tim : ";
+            cout << "\n\tNhập họ sinh viên cần tìm : ";
             string hoCanTim = "";
             getline(cin, hoCanTim);
             formChu(hoCanTim);
@@ -1357,7 +1044,7 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
         if (lc == "3")
         {
             cin.ignore();
-            cout << "\n\tNhap ten sinh vien can tim : ";
+            cout << "\n\tNhập tên sinh viên cần tìm : ";
             string tenCanTim = "";
             getline(cin, tenCanTim);
             formChu(tenCanTim);
@@ -1369,7 +1056,7 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
         if (lc == "4")
         {
             cin.ignore();
-            cout << "\n\tNhap lop sinh vien can tim : ";
+            cout << "\n\tNhập lớp sinh viên cần tìm : ";
             string lopCanTim = "";
             getline(cin, lopCanTim);
             formMssv(lopCanTim);
@@ -1381,7 +1068,7 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
 
         if (lc == "5")
         {
-            cout << "\n\tNhap diem sinh vien can tim : ";
+            cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
             cin >> diemCanTim;
             ostringstream convert;
@@ -1392,7 +1079,7 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
             system("pause");
         }
 
-        if (lc == "10")
+        if (lc == "6")
         {
             backToMainMenu = true;
         }
@@ -1400,7 +1087,7 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
         if (lc == "0")
         {
             giaiPhongBoNhoDSLKKep(listKep);
-            cout << "\n\t == KET THUC CHUONG TRINH ==\n";
+            cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
     }

@@ -51,26 +51,26 @@ SV nhapThongTinSinhVien(int luaChon)
 {
     SV sv;
 
-    cout << "\n\t- Nhap ma SV: ";
+    cout << "\n\t- Nhập mã SV: ";
     getline(cin, sv.maSV);
     formMssv(sv.maSV);
     while (!checkMaSv(sv.maSV, luaChon))
     {
-        cout << "\nMa sinh vien " << sv.maSV << " da ton tai\nVui long nhap lai ma sinh vien: ";
+        cout << "\nMã sinh viên " << sv.maSV << " đã tồn tại\nVui lòng nhập lại mã sinh viên: ";
         getline(cin, sv.maSV);
         formMssv(sv.maSV);
     }
 
-    cout << "\n\t- Nhap ho SV: ";
+    cout << "\n\t- Nhập họ SV: ";
     getline(cin, sv.ho);
     formChu(sv.ho);
-    cout << "\n\t- Nhap ten SV: ";
+    cout << "\n\t- Nhập tên SV: ";
     getline(cin, sv.ten);
     formChu(sv.ten);
-    cout << "\n\t- Nhap lop cua SV: ";
+    cout << "\n\t- Nhập lớp của SV: ";
     getline(cin, sv.lop);
     formMssv(sv.lop);
-    cout << "\n\t- Nhap diem cua SV: ";
+    cout << "\n\t- Nhập điểm của SV: ";
     cin >> sv.diem;
 
     return sv;
@@ -87,7 +87,7 @@ SV nhapTTSinhVien(fstream& input, int luaChon)
     getline(input, temp, ',');
     while (!checkMaSv(temp, luaChon))
     {
-        cout << "\nMa sinh vien " << temp << " da ton tai\nVui long nhap lai ma sinh vien: ";
+        cout << "\nMã sinh viên " << temp << " đã tồn tại\nVui lòng nhập lại mã sinh viên: ";
         getline(cin, temp);
     }
     sv.maSV = temp;
@@ -102,7 +102,7 @@ SV nhapTTSinhVien(fstream& input, int luaChon)
 // Hàm in tiêu đề
 void inTieuDe()
 {
-    cout << left << setw(30) << "| MSSV" << setw(30) << "| Ho va Ten" << setw(20) << "| Lop" << setw(10) << "| Diem" << endl;
+    cout << left << setw(30) << "| MSSV" << setw(30) << "| Ho va ten" << setw(20) << "| Lop" << setw(10) << "| Diem" << endl;
     cout << setfill('-') << setw(90) << "" << setfill(' ') << endl;
 }
 
@@ -131,7 +131,6 @@ void xuatSinhVienMang(SV LIST_MANG[], int& soLuongSinhVienMang)
     for (int i = 0; i < soLuongSinhVienMang; i++)
     {
         xuat(LIST_MANG[i]);
-        cout << endl;
     }
 }
 
@@ -253,7 +252,7 @@ void nhapMang()
 
     if (!input.is_open())
     {
-        cout << "\nMo file khong thanh cong\n";
+        cout << "\nMở file không thành công\n";
         return;
     }
 
@@ -278,7 +277,7 @@ void nhapDon()
 
     if (!input.is_open())
     {
-        cout << "\nMo file khong thanh cong\n";
+        cout << "\nMở file không thành công\n";
         return;
     }
 
@@ -299,7 +298,7 @@ void nhapVong(LIST_VONG& listVong)
 
     if (!input.is_open())
     {
-        cout << "\nMo file khong thanh cong\n";
+        cout << "\nMở file không thành công\n";
         return;
     }
 
@@ -322,7 +321,7 @@ void nhapKep(LIST_KEP& listKep)
 
     if (!input.is_open())
     {
-        cout << "\nMo file khong thanh cong\n";
+        cout << "\nMở file không thành công\n";
         return;
     }
 
