@@ -11,7 +11,7 @@ void lietKeSVDiemCaoNhatMang(SV LIST_MANG[], int& soLuongSinhVien)
         }
     }
 
-    cout << "\n\t--- Danh sach sinh vien co diem cao nhat\n";
+    cout << "\n\t--- Danh sách sinh viên có điểm cao nhất\n";
     inTieuDe();
 
     for (int i = 0; i < soLuongSinhVien; i++)
@@ -35,7 +35,7 @@ void lietKeSVDiemThapNhatMang(SV LIST_MANG[], int& soLuongSinhVien)
         }
     }
 
-    cout << "\n\t--- Danh sach sinh vien co diem cao nhat\n";
+    cout << "\n\t--- Danh sách sinh viên có điểm thấp nhất\n";
     inTieuDe();
 
     for (int i = 0; i < soLuongSinhVien; i++)
@@ -62,7 +62,7 @@ void lietKeSVDiemCaoNhatDSLKDon(LIST_DON listDon)
     }
 
     current = listDon.pHead_Don;
-    cout << "\n\t--- Danh sach sinh vien co diem cao nhat\n";
+    cout << "\n\t--- Danh sách sinh viên có điểm cao nhất\n";
     inTieuDe();
     while (current != nullptr)
     {
@@ -90,7 +90,7 @@ void lietKeSVDiemThapNhatDSLKDon(LIST_DON listDon)
     }
 
     current = listDon.pHead_Don;
-    cout << "\n\t--- Danh sach sinh vien co diem thap nhat\n";
+    cout << "\n\t--- Danh sách sinh viên có điểm thấp nhất\n";
     inTieuDe();
     // Liệt kê các sinh viên có điểm bằng minScore
     while (current != nullptr)
@@ -107,7 +107,7 @@ void lietKeSVDiemCaoNhatDSLKVong(LIST_VONG listVong)
 {
     if (listVong.pTail_Vong == nullptr)
     {
-        cout << "Danh sach rong.\n";
+        cout << "Danh sách rỗng.\n";
         return;
     }
 
@@ -124,7 +124,7 @@ void lietKeSVDiemCaoNhatDSLKVong(LIST_VONG listVong)
     } while (current != listVong.pTail_Vong->pNext_Vong); // Duyệt hết vòng
 
     current = listVong.pTail_Vong->pNext_Vong; // Bắt đầu từ đầu danh sách (pTail_Vong->pNext_Vong)
-    cout << "\n\t--- Danh sach sinh vien co diem cao nhat\n";
+    cout << "\n\t--- Danh sách sinh viên có điểm cao nhất\n";
     inTieuDe();
     do
     {
@@ -157,7 +157,7 @@ void lietKeSVDiemThapNhatDSLKVong(LIST_VONG listVong)
     } while (current != listVong.pTail_Vong->pNext_Vong); // Duyệt hết vòng
 
     current = listVong.pTail_Vong->pNext_Vong; // Bắt đầu từ đầu danh sách (pTail_Vong->pNext_Vong)
-    cout << "\n\t--- Danh sach sinh vien co diem cao nhat\n";
+    cout << "\n\t--- Danh sách sinh viên có điểm thấp nhất\n";
     inTieuDe();
     do
     {
@@ -192,7 +192,7 @@ void lietKeSVDiemCaoNhatDSLKKep(LIST_KEP listKep)
 
     // In ra thông tin các sinh viên có điểm bằng với điểm cao nhất
     current = listKep.pHead_Kep;
-    cout << "\n\t--- Danh sach sinh vien co diem cao nhat\n";
+    cout << "\n\t--- Danh sách sinh viên có điểm cao nhất\n";
     inTieuDe();
     while (current != nullptr)
     {
@@ -227,7 +227,7 @@ void lietKeSVDiemThapNhatDSLKKep(LIST_KEP listKep)
 
     // In ra thông tin các sinh viên có điểm bằng với điểm cao nhất
     current = listKep.pHead_Kep;
-    cout << "\n\t--- Danh sach sinh vien co diem cao nhat\n";
+    cout << "\n\t--- Danh sách sinh viên có điểm thấp nhất\n";
     inTieuDe();
     while (current != nullptr)
     {

@@ -1236,7 +1236,7 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
                 }
 
             } while (diemCanTim < 0 || diemCanTim > 10);
-
+            cin.ignore();
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();

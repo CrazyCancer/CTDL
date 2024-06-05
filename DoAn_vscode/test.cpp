@@ -79,13 +79,13 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
 
         if (luaChon == "5")
         {
-            lietKeSVDiemCaoNhatMang(LIST_MANG, soLuongSinhVien);
+            lietKeSVDiemThapNhatMang(LIST_MANG, soLuongSinhVien);
             system("pause");
         }
 
         if (luaChon == "6")
         {
-            lietKeSVDiemThapNhatMang(LIST_MANG, soLuongSinhVien);
+            lietKeSVDiemCaoNhatMang(LIST_MANG, soLuongSinhVien);
             system("pause");
         }
 
@@ -147,6 +147,8 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
 
         if (luaChon == "9")
         {
+            for(int i = 0; i < soLuongSinhVien; i++)
+                listMang[i] = {};
             break;
         }
 
@@ -218,13 +220,13 @@ void menuChoDSLKDon()
 
         if (luaChon == "5")
         {
-            lietKeSVDiemCaoNhatDSLKDon(listDon);
+            lietKeSVDiemThapNhatDSLKDon(listDon);
             system("pause");
         }
 
         if (luaChon == "6")
         {
-            lietKeSVDiemThapNhatDSLKDon(listDon);
+            lietKeSVDiemCaoNhatDSLKDon(listDon);
             system("pause");
         }
 
@@ -286,6 +288,7 @@ void menuChoDSLKDon()
 
         if (luaChon == "9")
         {
+            giaiPhongBoNhoDSLKDon(listDon);
             break;
         }
         if (luaChon == "0")
@@ -356,13 +359,13 @@ void menuChoDSLKVong(LIST_VONG& listVong)
 
         if (luaChon == "5")
         {
-            lietKeSVDiemCaoNhatDSLKVong(listVong);
+            lietKeSVDiemThapNhatDSLKVong(listVong);
             system("pause");
         }
 
         if (luaChon == "6")
         {
-            lietKeSVDiemThapNhatDSLKVong(listVong);
+            lietKeSVDiemCaoNhatDSLKVong(listVong);
             system("pause");
         }
 
@@ -496,13 +499,13 @@ void menuChoDSLKKep(LIST_KEP listKep)
 
         if (luaChon == "5")
         {
-            lietKeSVDiemCaoNhatDSLKKep(listKep);
+            lietKeSVDiemThapNhatDSLKKep(listKep);
             system("pause");
         }
 
         if (luaChon == "6")
         {
-            lietKeSVDiemThapNhatDSLKKep(listKep);
+            lietKeSVDiemCaoNhatDSLKKep(listKep);
             system("pause");
         }
 
@@ -572,7 +575,6 @@ void menuChoDSLKKep(LIST_KEP listKep)
             cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
-        system("pause");
     }
 }
 
