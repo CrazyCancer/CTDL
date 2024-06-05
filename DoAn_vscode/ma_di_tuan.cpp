@@ -92,7 +92,7 @@ void Try(int n, int row, int col) {
 
 int main() {
     ios_base::sync_with_stdio(false);
-    cout.tie(0);
+    cout.tie(nullptr);
     SetConsoleOutputCP(CP_UTF8);
     cout << "Nhập kích thước bàn cờ: ";
     cin >> n;

@@ -2,6 +2,7 @@
 #define CYAN 11
 #define WHITE 15
 #define RED 4
+
 // ------------------------------------
 
 // Hàm đổi màu chữ
@@ -96,8 +97,8 @@ vector<int> Linear_Search_Substring(SV listMang[], int size, const T2 &substring
     for (int i = 0; i < size; ++i)
     {
         string fieldValue = getValue(listMang[i], field);
-        // Check if the substring is part of the fieldValue
-        if (fieldValue.find(substring) != string::npos)
+        // Check if the substring is at the beginning of the fieldValue
+        if (fieldValue.find(substring) == 0)
         {
             indices.push_back(i);
         }
@@ -141,7 +142,6 @@ void quickSort(SV a[], int l, int r, const string &input)
     }
 }
 
-// ----------------------------------------Phần dành cho DSLK Đơn
 
 //----------------
 string TenDaoNguoc(string str)
@@ -188,7 +188,7 @@ void luaChonXuatTenDaoNguocMang(SV LIST_MANG[], int &soLuongSinhVien, const vect
                     SET_COLOR(WHITE); // Thay WHITE bằng mã màu mặc định của bạn
                     cout << "Ten dao nguoc: " << reversedName << " " << reversedHo << endl;
                 }
-                else if (field != "ho" && getValue(LIST_MANG[i], field)==value)
+                else if (field != "ho" && getValue(LIST_MANG[i], field) == value)
                 {
                     SET_COLOR(RED);
                     xuat(LIST_MANG[i]);
@@ -262,11 +262,20 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
 
         if (lc == "1")
         {
-            cin.ignore();
+
             int index = 0;
             cout << "\n\tNhập mã sinh viên cần tìm : ";
             string mssvCanTim = "";
-            getline(cin, mssvCanTim);
+
+            while (true)
+            {
+                getline(cin, mssvCanTim);
+                if (!mssvCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formMssv(mssvCanTim);
             // --- sap xep
 
@@ -276,7 +285,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
 
             int result_str = Binary_Search<string>(LIST_MANG, 0, soLuongSinhVien - 1, mssvCanTim, "maSV");
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto end = chrono::high_resolution_clock::now();                         // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start); // Tính thời gian
             int tgianTimKiem = duration.count();
             if (result_str != -1)
@@ -284,8 +293,6 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
                 vector<int> foundIndices;
                 foundIndices.push_back(result_str);
                 luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "maSV", mssvCanTim);
-
-                system("pause");
             }
             else
             {
@@ -298,21 +305,26 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
 
         if (lc == "2")
         {
-            cin.ignore();
+
             int index = 0;
             cout << "\n\tNhập họ sinh viên cần tìm : ";
             string hoCanTim = "";
-            getline(cin, hoCanTim);
+            while (true)
+            {
+                getline(cin, hoCanTim);
+                if (!hoCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formChu(hoCanTim);
-
-            // --- sap xep thử
 
             //-------------------
 
-           
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
-            quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "ho");
-            
+            // quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "ho");
+
             vector<int> foundIndices = Linear_Search_Substring(LIST_MANG, soLuongSinhVien, hoCanTim, "ho");
 
             auto end = chrono::high_resolution_clock::now();                         // Kết thúc tính thời gian
@@ -334,11 +346,20 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
 
         if (lc == "3")
         {
-            cin.ignore();
+            
             int index = 0;
             cout << "\n\tNhập tên sinh viên cần tìm : ";
             string tenCanTim = "";
-            getline(cin, tenCanTim);
+
+            while (true)
+            {
+                getline(cin, tenCanTim);
+                if (!tenCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formChu(tenCanTim);
 
             // --- sap xep thử
@@ -350,7 +371,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
 
             int result_str = Binary_Search<string>(LIST_MANG, 0, soLuongSinhVien - 1, tenCanTim, "ten");
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto end = chrono::high_resolution_clock::now();                         // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start); // Tính thời gian
             int tgianTimKiem = duration.count();
             if (result_str != -1)
@@ -364,8 +385,6 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
                     }
                 }
                 luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "ten", tenCanTim);
-
-                system("pause");
             }
             else
             {
@@ -378,11 +397,19 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
 
         if (lc == "4")
         {
-            cin.ignore();
+            
             int index = 0;
             cout << "\n\tNhập lớp sinh viên cần tìm : ";
             string lopCanTim = "";
-            getline(cin, lopCanTim);
+            while (true)
+            {
+                getline(cin, lopCanTim);
+                if (!lopCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formMssv(lopCanTim);
             // --- sap xep thử
 
@@ -393,7 +420,7 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
 
             int result_str = Binary_Search<string>(LIST_MANG, 0, soLuongSinhVien - 1, lopCanTim, "lop");
 
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto end = chrono::high_resolution_clock::now();                         // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start); // Tính thời gian
             int tgianTimKiem = duration.count();
             if (result_str != -1)
@@ -407,8 +434,6 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
                     }
                 }
                 luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "lop", lopCanTim);
-
-                system("pause");
             }
             else
             {
@@ -424,33 +449,52 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
             int index = 0;
             cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
-            cin >> diemCanTim;
+           
+           
 
-            // --- sap xep thử
+            do
+            {
+                cin >> diemCanTim;
+                if (diemCanTim < 0 || diemCanTim > 10)
+                {
+                    cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
+                }
+
+            } while(diemCanTim < 0 || diemCanTim > 10);
+
+           
 
             //-------------------
 
             // tìm
-           
+
             auto start = chrono::high_resolution_clock::now(); // Bắt đầu tính thời gian
             quickSort(LIST_MANG, 0, soLuongSinhVien - 1, "diem");
 
             vector<int> foundIndices;
             for (int i = 0; i < soLuongSinhVien; ++i)
-            {
-                if (LIST_MANG[i].diem == diemCanTim)
+            {                if (LIST_MANG[i].diem == diemCanTim)
                 {
                     foundIndices.push_back(i);
                 }
             }
-            auto end = chrono::high_resolution_clock::now();                          // Kết thúc tính thời gian
+            auto end = chrono::high_resolution_clock::now();                         // Kết thúc tính thời gian
             auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start); // Tính thời gian
             int tgianTimKiem = duration.count();
             // Chuyển đổi float thành string
             std::ostringstream ss;
             ss << std::fixed << std::setprecision(2) << diemCanTim;
             std::string diemCanTimStr = ss.str();
-            luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "diem", diemCanTimStr);
+            if (!foundIndices.empty())
+            {
+                luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "diem", diemCanTimStr);
+
+            }
+            else
+            {
+                cout << "\n\tKhông tìm thấy ...\n"
+                    << endl;
+            }
 
             system("pause");
         }
@@ -597,10 +641,18 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
 
         if (lc == "1")
         {
-            cin.ignore();
+           
             cout << "\n\tNhập mã sinh viên cần tìm : ";
             string mssvCanTim = "";
-            getline(cin, mssvCanTim);
+            while (true)
+            {
+                getline(cin, mssvCanTim);
+                if (!mssvCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formMssv(mssvCanTim);
 
             luaChonXuatTenDaoNguocDSLKDon(listDon, "maSV", mssvCanTim);
@@ -610,10 +662,18 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
 
         if (lc == "2")
         {
-            cin.ignore();
+            
             cout << "\n\tNhập họ sinh viên cần tìm : ";
             string hoCanTim = "";
-            getline(cin, hoCanTim);
+            while (true)
+            {
+                getline(cin, hoCanTim);
+                if (!hoCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formChu(hoCanTim);
 
             luaChonXuatTenDaoNguocDSLKDon(listDon, "ho", hoCanTim);
@@ -623,10 +683,17 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
 
         if (lc == "3")
         {
-            cin.ignore();
+            
             cout << "\n\tNhập tên sinh viên cần tìm : ";
             string tenCanTim = "";
-            getline(cin, tenCanTim);
+            {
+                getline(cin, tenCanTim);
+                if (!tenCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formChu(tenCanTim);
 
             luaChonXuatTenDaoNguocDSLKDon(listDon, "ten", tenCanTim);
@@ -636,10 +703,18 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
 
         if (lc == "4")
         {
-            cin.ignore();
+           
             cout << "\n\tNhập lớp sinh viên cần tìm : ";
             string lopCanTim = "";
-            getline(cin, lopCanTim);
+            while (true)
+            {
+                getline(cin, lopCanTim);
+                if (!lopCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formMssv(lopCanTim);
 
             luaChonXuatTenDaoNguocDSLKDon(listDon, "lop", lopCanTim);
@@ -651,7 +726,16 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
         {
             cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
-            cin >> diemCanTim;
+            do
+            {
+                cin >> diemCanTim;
+                if (diemCanTim < 0 || diemCanTim > 10)
+                {
+                    cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << "\n";
+                }
+
+            } while (diemCanTim < 0 || diemCanTim > 10);
+            cin.ignore();
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();
@@ -811,10 +895,18 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
 
         if (lc == "1")
         {
-            cin.ignore();
+            
             cout << "\n\tNhập mã sinh viên cần tìm : ";
             string mssvCanTim = "";
-            getline(cin, mssvCanTim);
+            while (true)
+            {
+                getline(cin, mssvCanTim);
+                if (!mssvCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formMssv(mssvCanTim);
 
             luaChonXuatTenDaoNguocDSLKVong(listVong, "maSV", mssvCanTim);
@@ -824,10 +916,18 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
 
         if (lc == "2")
         {
-            cin.ignore();
+            
             cout << "\n\tNhập họ sinh viên cần tìm : ";
             string hoCanTim = "";
-            getline(cin, hoCanTim);
+            while (true)
+            {
+                getline(cin, hoCanTim);
+                if (!hoCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formChu(hoCanTim);
 
             luaChonXuatTenDaoNguocDSLKVong(listVong, "ho", hoCanTim);
@@ -837,10 +937,18 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
 
         if (lc == "3")
         {
-            cin.ignore();
+           
             cout << "\n\tNhập tên sinh viên cần tìm : ";
             string tenCanTim = "";
-            getline(cin, tenCanTim);
+            while (true)
+            {
+                getline(cin, tenCanTim);
+                if (!tenCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formChu(tenCanTim);
             luaChonXuatTenDaoNguocDSLKVong(listVong, "ten", tenCanTim);
 
@@ -849,10 +957,18 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
 
         if (lc == "4")
         {
-            cin.ignore();
+            
             cout << "\n\tNhập lớp sinh viên cần tìm : ";
             string lopCanTim = "";
-            getline(cin, lopCanTim);
+            while (true)
+            {
+                getline(cin, lopCanTim);
+                if (!lopCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formMssv(lopCanTim);
 
             luaChonXuatTenDaoNguocDSLKVong(listVong, "lop", lopCanTim);
@@ -864,7 +980,16 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
         {
             cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
-            cin >> diemCanTim;
+            do
+            {
+                cin >> diemCanTim;
+                if (diemCanTim < 0 || diemCanTim > 10)
+                {
+                    cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
+                }
+
+            } while (diemCanTim < 0 || diemCanTim > 10);
+            cin.ignore();
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();
@@ -1017,10 +1142,18 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
 
         if (lc == "1")
         {
-            cin.ignore();
+           
             cout << "\n\tNhập mã sinh viên cần tìm : ";
             string mssvCanTim = "";
-            getline(cin, mssvCanTim);
+            while (true)
+            {
+                getline(cin, mssvCanTim);
+                if (!mssvCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formMssv(mssvCanTim);
 
             luaChonXuatTenDaoNguocDSLKKep(listKep, "maSV", mssvCanTim);
@@ -1030,10 +1163,18 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
 
         if (lc == "2")
         {
-            cin.ignore();
+           
             cout << "\n\tNhập họ sinh viên cần tìm : ";
             string hoCanTim = "";
-            getline(cin, hoCanTim);
+            while (true)
+            {
+                getline(cin, hoCanTim);
+                if (!hoCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formChu(hoCanTim);
 
             luaChonXuatTenDaoNguocDSLKKep(listKep, "ho", hoCanTim);
@@ -1043,10 +1184,18 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
 
         if (lc == "3")
         {
-            cin.ignore();
+           
             cout << "\n\tNhập tên sinh viên cần tìm : ";
             string tenCanTim = "";
-            getline(cin, tenCanTim);
+            while (true)
+            {
+                getline(cin, tenCanTim);
+                if (!tenCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formChu(tenCanTim);
             luaChonXuatTenDaoNguocDSLKKep(listKep, "ten", tenCanTim);
 
@@ -1055,10 +1204,18 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
 
         if (lc == "4")
         {
-            cin.ignore();
+           
             cout << "\n\tNhập lớp sinh viên cần tìm : ";
             string lopCanTim = "";
-            getline(cin, lopCanTim);
+            while (true)
+            {
+                getline(cin, lopCanTim);
+                if (!lopCanTim.empty())
+                {
+                    break;
+                }
+                cout << "Vui lòng nhập vào một chuỗi: ";
+            }
             formMssv(lopCanTim);
 
             luaChonXuatTenDaoNguocDSLKKep(listKep, "lop", lopCanTim);
@@ -1070,7 +1227,16 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
         {
             cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
-            cin >> diemCanTim;
+            do
+            {
+                cin >> diemCanTim;
+                if (diemCanTim < 0 || diemCanTim > 10)
+                {
+                    cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
+                }
+
+            } while (diemCanTim < 0 || diemCanTim > 10);
+
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();

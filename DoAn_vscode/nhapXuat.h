@@ -184,19 +184,6 @@ void themVaoCuoiDSLKVong(LIST_VONG& listVong, pNODE_VONG p)
     }
 }
 
-// void themSVVaoCuoiDSLKVong(LIST_VONG& listVong, const SV& sv)
-//{
-//     cout << "--t";
-//     NODE_VONG* p = new NODE_VONG;
-//     if (p == nullptr)
-//     {
-//         throw std::bad_alloc();
-//     }
-//     p->data = sv;
-//     p->pNext_Vong = nullptr;
-//     themVaoCuoiDSLKVong(listVong, p);
-// }
-
 void themSVVaoCuoiDSLKVong(LIST_VONG& listVong, const SV& sv)
 {
     pNODE_VONG p = khoiTaoNodeVong(sv);

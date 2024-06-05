@@ -52,6 +52,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
             cout << "\n\t   1. Xuất danh sách sinh viên \n\n";
             inTieuDe();
             xuatSinhVienMang(listMang, soLuongSinhVien);
+            system("pause");
         }
 
         if (luaChon == "2")
@@ -65,6 +66,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
             cout << "\n\t   3. Thêm mới sinh viên\n\n";
             themSinhVienMang(listMang, soLuongSinhVien, soLuongSinhVien);
             cout << "\n\tTHÊM THÀNH CÔNG !!!\n\n";
+            system("pause");
         }
 
         if (luaChon == "4")
@@ -72,23 +74,25 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
             // cin.ignore();
             cout << "\n\t   4. Xóa sinh viên\n\n";
             xoaSVMang(LIST_MANG, soLuongSinhVien);
-            cout << "\n\tXÓA THÀNH CÔNG !!!\n\n";
+            system("pause");
         }
 
         if (luaChon == "5")
         {
             lietKeSVDiemCaoNhatMang(LIST_MANG, soLuongSinhVien);
+            system("pause");
         }
 
         if (luaChon == "6")
         {
             lietKeSVDiemThapNhatMang(LIST_MANG, soLuongSinhVien);
+            system("pause");
         }
 
         if (luaChon == "7")
         {
-
             cout << "\n\t-- Điểm Trung Bình của các sinh viên: " << diemTBMang(LIST_MANG, soLuongSinhVien) << endl;
+            system("pause");
         }
 
         if (luaChon == "8")
@@ -138,21 +142,20 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
 				clock_t end = clock();
 				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
+            system("pause");
         }
 
         if (luaChon == "9")
         {
-            cin.ignore();
             break;
         }
 
         if (luaChon == "0")
         {
             cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
-            cin.ignore();
+            system("pause");
             exit(0);
         }
-        system("pause");
     }
 }
 
@@ -190,6 +193,7 @@ void menuChoDSLKDon()
         {
             inTieuDe();
             xuatDSLKDon(listDon);
+            system("pause");
         }
 
         if (luaChon == "2")
@@ -202,28 +206,32 @@ void menuChoDSLKDon()
             cout << "- Thêm sinh viên tiếp theo: ";
             themSVVaoCuoiDSLKDon(listDon, nhapThongTinSinhVien(2));
             cout << "\n\tTHÊM THÀNH CÔNG !!!\n\n";
+            system("pause");
         }
 
         if (luaChon == "4")
         {
             cout << "\n\t   4. Xóa sinh viên\n\n";
             xoaSVDSLKDon(listDon);
-            cout << "\n\tXÓA THÀNH CÔNG!!!\n\n";
+            system("pause");
         }
 
         if (luaChon == "5")
         {
             lietKeSVDiemCaoNhatDSLKDon(listDon);
+            system("pause");
         }
 
         if (luaChon == "6")
         {
             lietKeSVDiemThapNhatDSLKDon(listDon);
+            system("pause");
         }
 
         if (luaChon == "7")
         {
             cout << "\n\t-- Điểm Trung Bình của các sinh viên: " << diemTBDSLKDon(listDon) << endl;
+            system("pause");
         }
 
         if (luaChon == "8")
@@ -273,11 +281,11 @@ void menuChoDSLKDon()
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
+            system("pause");
         }
 
         if (luaChon == "9")
         {
-            cin.ignore();
             break;
         }
         if (luaChon == "0")
@@ -286,11 +294,10 @@ void menuChoDSLKDon()
             cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
-        system("pause");
     }
 }
 
-void menuChoDSLKVong(LIST_VONG listVong)
+void menuChoDSLKVong(LIST_VONG& listVong)
 {
     string luaChon;
     while (true)
@@ -324,6 +331,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
         {
             inTieuDe();
             xuatDSLKVong(listVong);
+            system("pause");
         }
 
         if (luaChon == "2")
@@ -336,28 +344,32 @@ void menuChoDSLKVong(LIST_VONG listVong)
             cout << "- Thêm sinh viên tiếp theo: ";
             themSVVaoCuoiDSLKVong(listVong, nhapThongTinSinhVien(3));
             cout << "\n\tTHÊM THÀNH CÔNG !!!\n\n";
+            system("pause");
         }
 
         if (luaChon == "4")
         {
             cout << "\n\t   4. Xóa sinh viên\n\n";
             xoaSVDSLKVong(listVong);
-            cout << "\n\tXÓA THÀNH CÔNG !!!\n\n";
+            system("pause");
         }
 
         if (luaChon == "5")
         {
             lietKeSVDiemCaoNhatDSLKVong(listVong);
+            system("pause");
         }
 
         if (luaChon == "6")
         {
             lietKeSVDiemThapNhatDSLKVong(listVong);
+            system("pause");
         }
 
         if (luaChon == "7")
         {
             cout << "\n\t-- Điểm Trung Bình của các sinh viên: " << diemTBDSLKVong(listVong) << endl;
+            system("pause");
         }
 
         if (luaChon == "8")
@@ -407,6 +419,7 @@ void menuChoDSLKVong(LIST_VONG listVong)
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
+            system("pause");
         }
 
         if (luaChon == "9")
@@ -420,7 +433,6 @@ void menuChoDSLKVong(LIST_VONG listVong)
             cout << "\n\t == KẾT THÚC CHƯƠNG TRÌNH ==\n";
             exit(0);
         }
-        system("pause");
     }
 }
 
@@ -458,6 +470,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
         {
             inTieuDe();
             xuatDSLKKep(listKep);
+            system("pause");
         }
 
         if (luaChon == "2")
@@ -470,6 +483,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
             cout << "- Thêm sinh viên tiếp theo: ";
             themSVVaoCuoiDSLKKep(listKep, nhapThongTinSinhVien(4));
             cout << "\n\tTHÊM THÀNH CÔNG !!!\n\n";
+            system("pause");
         }
 
         if (luaChon == "4")
@@ -477,22 +491,25 @@ void menuChoDSLKKep(LIST_KEP listKep)
             cin.ignore();
             cout << "\n\t   4. Xóa sinh viên\n\n";
             xoaSVDSLKKep(listKep);
-            cout << "\n\tXÓA THÀNH CÔNG !!!\n\n";
+            system("pause");
         }
 
         if (luaChon == "5")
         {
             lietKeSVDiemCaoNhatDSLKKep(listKep);
+            system("pause");
         }
 
         if (luaChon == "6")
         {
             lietKeSVDiemThapNhatDSLKKep(listKep);
+            system("pause");
         }
 
         if (luaChon == "7")
         {
             cout << "\n\t-- Điểm Trung Bình của các sinh viên: " << diemTBDSLKKep(listKep) << endl;
+            system("pause");
         }
 
         if (luaChon == "8")
@@ -542,11 +559,11 @@ void menuChoDSLKKep(LIST_KEP listKep)
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
+            system("pause");
         }
 
         if (luaChon == "9")
         {
-            cin.ignore();
             break;
         }
         if (luaChon == "0")
@@ -602,7 +619,6 @@ static void mainMenu()
         if (luaChon == "3")
         {
 
-            LIST_VONG listVong;
             khoiTaoDSLKVong(listVong);
 
             nhapVong(listVong);
@@ -612,7 +628,6 @@ static void mainMenu()
         if (luaChon == "4")
         {
 
-            LIST_KEP listKep;
             khoiTaoDSLKKep(listKep);
 
             nhapKep(listKep);
@@ -631,7 +646,8 @@ static void mainMenu()
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cout.tie(0);
+    cout.tie(nullptr);
+    SetConsoleCP(CP_UTF8);
     SetConsoleOutputCP(CP_UTF8);
     mainMenu();
 }

@@ -28,6 +28,7 @@ void xoaSVMang(SV LIST_MANG[], int& soLuongSinhVien)
     }
 
     soLuongSinhVien--;
+    cout << "\n\tXÓA THÀNH CÔNG !!!\n\n";
 }
 
 void xoaSVDSLKDon(LIST_DON& listDon)
