@@ -27,7 +27,7 @@ void insertionSortMang(SV LIST_MANG[], int tieuchi)
     }
     if (tieuchi == 3)
     {
-        int x;
+        float x;
         int i, j;
         for (i = 1; i < soLuong; i++)
         {

@@ -63,6 +63,21 @@ void mergeSinglyLinkedListPointer(vector<pNODE_DON> &linkedListPointer, int left
     }
 }
 
+void mergeSortSinglyLinkedList(vector<pNODE_DON>& linkedListPointer, int left, int right, int tieuChi)
+{
+    if (left < right)
+    {
+        int mid = left + (right - left) / 2; // (left+right)/2
+        // gọi đệ quy chia đôi mảng
+        mergeSortSinglyLinkedList(linkedListPointer, left, mid, tieuChi);
+        mergeSortSinglyLinkedList(linkedListPointer, mid + 1, right, tieuChi);
+
+        mergeSinglyLinkedListPointer(linkedListPointer, left, mid, right, tieuChi);
+    }
+    else
+        return;
+}
+
 // #MergeSort dslk vong
 void mergeCircularLinkedListPointer(vector<pNODE_VONG> &linkedListPointer, int left, int mid, int right, int tieuChi)
 {
@@ -224,20 +239,6 @@ void mergeSortDoublyLinkedList(vector<pNODE_KEP> &linkedListPointer, int left, i
 }
 
 // #MergeSort dslk
-void mergeSortSinglyLinkedList(vector<pNODE_DON> &linkedListPointer, int left, int right, int tieuChi)
-{
-    if (left < right)
-    {
-        int mid = left + (right - left) / 2; // (left+right)/2
-        // gọi đệ quy chia đôi mảng
-        mergeSortSinglyLinkedList(linkedListPointer, left, mid, tieuChi);
-        mergeSortSinglyLinkedList(linkedListPointer, mid + 1, right, tieuChi);
-
-        mergeSinglyLinkedListPointer(linkedListPointer, left, mid, right, tieuChi);
-    }
-    else
-        return;
-}
 
 void mergeSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, int kieuDL, int tieuChi, int n)
 {
@@ -268,9 +269,9 @@ void mergeSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
         linkedListPointer.push_back(p);
 
         mergeSortCircularLinkedList(linkedListPointer, 0, n - 1, tieuChi);
-        khoiTaoDSLKVong(listVong);
+        khoiTaoDSLKVong(dsVong);
         for (int i = 0; i < n; i++)
-            themVaoCuoiDSLKVong(listVong, khoiTaoNodeVong(linkedListPointer[i]->data));
+            themVaoCuoiDSLKVong(dsVong, khoiTaoNodeVong(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();
@@ -284,12 +285,14 @@ void mergeSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
             linkedListPointer.push_back(p);
             p = p->pNext_Kep;
         }
+        
+        mergeSortDoublyLinkedList(linkedListPointer, 0, n - 1, tieuChi);
 
-        quicksortDoublyLinkedList(linkedListPointer, 0, n - 1, tieuChi);
-
-        khoiTaoDSLKKep(listKep);
+        khoiTaoDSLKKep(dsKep);
         for (int i = 0; i < n; i++)
-            themVaoCuoiDSLKKep(listKep, khoiTaoNodeKep(linkedListPointer[i]->data));
+        {
+            themVaoCuoiDSLKKep(dsKep, khoiTaoNodeKep(linkedListPointer[i]->data));
+        }
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();

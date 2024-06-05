@@ -202,9 +202,9 @@ void quickSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
         linkedListPointer.push_back(p);
 
         quicksortCircularLinkedList(linkedListPointer, 0, n - 1, tieuChi);
-        khoiTaoDSLKVong(listVong);
+        khoiTaoDSLKVong(dsVong);
         for (int i = 0; i < n; i++)
-            themVaoCuoiDSLKVong(listVong, khoiTaoNodeVong(linkedListPointer[i]->data));
+            themVaoCuoiDSLKVong(dsVong, khoiTaoNodeVong(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();
@@ -221,9 +221,9 @@ void quickSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, in
 
         quicksortDoublyLinkedList(linkedListPointer, 0, n - 1, tieuChi);
 
-        khoiTaoDSLKKep(listKep);
+        khoiTaoDSLKKep(dsKep);
         for (int i = 0; i < n; i++)
-            themVaoCuoiDSLKKep(listKep, khoiTaoNodeKep(linkedListPointer[i]->data));
+            themVaoCuoiDSLKKep(dsKep, khoiTaoNodeKep(linkedListPointer[i]->data));
 
         linkedListPointer.clear();
         linkedListPointer.shrink_to_fit();

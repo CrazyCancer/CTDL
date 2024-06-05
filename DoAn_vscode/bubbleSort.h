@@ -22,7 +22,7 @@ void bubbleSortArray(SV LIST_MANG[], int tieuChi)
         }
 }
 
-void bubbleSortSinglyLinkedList(LIST_DON &ds, int tieuChi)
+void bubbleSortSinglyLinkedList(LIST_DON& ds, int tieuChi)
 {
     int i;
     pNODE_DON p, end = NULL, start = ds.pHead_Don;
@@ -58,7 +58,7 @@ void bubbleSortSinglyLinkedList(LIST_DON &ds, int tieuChi)
     } while (i > 0);
 }
 
-void bubbleSortDoublyLinkedList(LIST_KEP &ds, int tieuChi)
+void bubbleSortDoublyLinkedList(LIST_KEP& ds, int tieuChi)
 {
     int i;
     pNODE_KEP p, end = NULL, start = ds.pHead_Kep;
@@ -94,7 +94,7 @@ void bubbleSortDoublyLinkedList(LIST_KEP &ds, int tieuChi)
     } while (i > 0);
 }
 
-void bubbleSortCircularLinkedList(LIST_VONG &ds, int tieuChi)
+void bubbleSortCircularLinkedList(LIST_VONG& ds, int tieuChi)
 {
     int i;
     pNODE_VONG start = ds.pTail_Vong->pNext_Vong, p;

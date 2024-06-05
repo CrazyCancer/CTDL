@@ -117,11 +117,11 @@ void quickSort(SV a[], int l, int r, const string &input)
     {
         while (getValue(a[i], input) < midValue)
         {
-            i++;
+            i++;// i tìm kiếm những phần tử > mid 
         }
         while (getValue(a[j], input) > midValue)
         {
-            j--;
+            j--; // j tìm kiếm những phần tử < mid
         }
         if (i <= j)
         {
@@ -293,6 +293,8 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
                 vector<int> foundIndices;
                 foundIndices.push_back(result_str);
                 luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "maSV", mssvCanTim);
+
+                system("pause");
             }
             else
             {
@@ -385,6 +387,8 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
                     }
                 }
                 luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "ten", tenCanTim);
+
+                system("pause");
             }
             else
             {
@@ -434,6 +438,8 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
                     }
                 }
                 luaChonXuatTenDaoNguocMang(LIST_MANG, soLuongSinhVien, foundIndices, index, tgianTimKiem, "lop", lopCanTim);
+
+                system("pause");
             }
             else
             {
@@ -452,16 +458,27 @@ void timKiemSinhVienMang(SV LIST_MANG[], int &soLuongSinhVien) //  ---------- M�
            
            
 
-            do
-            {
-                cin >> diemCanTim;
-                if (diemCanTim < 0 || diemCanTim > 10)
-                {
-                    cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
+           
+           
+            string input;
+
+            while (true) {
+                cout << "Nhập điểm (từ 0 đến 10): ";
+                getline(cin, input); // Đọc toàn bộ dòng đầu vào
+
+                stringstream ss(input);
+                if (ss >> diemCanTim && ss.eof()) { // Kiểm tra xem toàn bộ chuỗi có thể được chuyển đổi thành số hợp lệ không
+                    if (diemCanTim >= 0 && diemCanTim <= 10) {
+                        break; // Nếu điểm hợp lệ, thoát khỏi vòng lặp
+                    }
+                    else {
+                        cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
+                    }
                 }
-
-            } while(diemCanTim < 0 || diemCanTim > 10);
-
+                else {
+                    cout << "Giá trị nhập vào không hợp lệ. Vui lòng nhập lại." << endl;
+                }
+            }
            
 
             //-------------------
@@ -726,16 +743,26 @@ void timKiemSinhVienDanhSachLkDon(LIST_DON &listDon)
         {
             cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
-            do
-            {
-                cin >> diemCanTim;
-                if (diemCanTim < 0 || diemCanTim > 10)
-                {
-                    cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << "\n";
-                }
+            string input;
 
-            } while (diemCanTim < 0 || diemCanTim > 10);
-            cin.ignore();
+            while (true) {
+                cout << "Nhập điểm (từ 0 đến 10): ";
+                getline(cin, input); // Đọc toàn bộ dòng đầu vào
+
+                stringstream ss(input);
+                if (ss >> diemCanTim && ss.eof()) { // Kiểm tra xem toàn bộ chuỗi có thể được chuyển đổi thành số hợp lệ không
+                    if (diemCanTim >= 0 && diemCanTim <= 10) {
+                        break; // Nếu điểm hợp lệ, thoát khỏi vòng lặp
+                    }
+                    else {
+                        cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
+                    }
+                }
+                else {
+                    cout << "Giá trị nhập vào không hợp lệ. Vui lòng nhập lại." << endl;
+                }
+            }
+
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();
@@ -980,16 +1007,26 @@ void timKiemSinhVienDanhSachLkVong(LIST_VONG &listVong)
         {
             cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
-            do
-            {
-                cin >> diemCanTim;
-                if (diemCanTim < 0 || diemCanTim > 10)
-                {
-                    cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
-                }
+            string input;
 
-            } while (diemCanTim < 0 || diemCanTim > 10);
-            cin.ignore();
+            while (true) {
+                cout << "Nhập điểm (từ 0 đến 10): ";
+                getline(cin, input); // Đọc toàn bộ dòng đầu vào
+
+                stringstream ss(input);
+                if (ss >> diemCanTim && ss.eof()) { // Kiểm tra xem toàn bộ chuỗi có thể được chuyển đổi thành số hợp lệ không
+                    if (diemCanTim >= 0 && diemCanTim <= 10) {
+                        break; // Nếu điểm hợp lệ, thoát khỏi vòng lặp
+                    }
+                    else {
+                        cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
+                    }
+                }
+                else {
+                    cout << "Giá trị nhập vào không hợp lệ. Vui lòng nhập lại." << endl;
+                }
+            }
+
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();
@@ -1227,16 +1264,26 @@ void timKiemSinhVienDanhSachLKKep(LIST_KEP &listKep)
         {
             cout << "\n\tNhập điểm sinh viên cần tìm : ";
             float diemCanTim;
-            do
-            {
-                cin >> diemCanTim;
-                if (diemCanTim < 0 || diemCanTim > 10)
-                {
-                    cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
-                }
+            string input;
 
-            } while (diemCanTim < 0 || diemCanTim > 10);
-            cin.ignore();
+            while (true) {
+                cout << "Nhập điểm (từ 0 đến 10): ";
+                getline(cin, input); // Đọc toàn bộ dòng đầu vào
+
+                stringstream ss(input);
+                if (ss >> diemCanTim && ss.eof()) { // Kiểm tra xem toàn bộ chuỗi có thể được chuyển đổi thành số hợp lệ không
+                    if (diemCanTim >= 0 && diemCanTim <= 10) {
+                        break; // Nếu điểm hợp lệ, thoát khỏi vòng lặp
+                    }
+                    else {
+                        cout << "Điểm phải nằm trong khoảng từ 0 đến 10. Vui lòng nhập lại." << endl;
+                    }
+                }
+                else {
+                    cout << "Giá trị nhập vào không hợp lệ. Vui lòng nhập lại." << endl;
+                }
+            }
+
             ostringstream convert;
             convert << fixed << setprecision(2) << diemCanTim; // Make sure this precision matches what getValue uses
             string tam = convert.str();

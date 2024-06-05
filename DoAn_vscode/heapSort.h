@@ -8,12 +8,14 @@ void convertToSinglyLinkedList(LIST_DON &dsDon, SV a[])
 
 void convertToDoublyLinkedList(LIST_KEP &dsKep, SV a[])
 {
+    khoiTaoDSLKKep(dsKep);
     for (int i = 0; i < soLuong; i++)
         themVaoCuoiDSLKKep(dsKep, khoiTaoNodeKep(a[i]));
 }
 
 void convertToCircularLinkedList(LIST_VONG &dsVong, SV a[])
 {
+    khoiTaoDSLKVong(dsVong);
     for (int i = 0; i < soLuong; i++)
         themVaoCuoiDSLKVong(dsVong, khoiTaoNodeVong(a[i]));
 }
@@ -71,8 +73,10 @@ void heapSortArray(SV LIST_MANG[], int n, int tieuChi)
 
 void heapSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, SV a[], int kieuDL, int tieuChi, int n)
 {
+    //cout << kieuDL;
     if (kieuDL == 2)
     {
+        //xuatDSLKDon(listDon);
         int k = 0;
         pNODE_DON i = dsDon.pHead_Don;
         while (i != NULL)
@@ -108,7 +112,10 @@ void heapSortLinkedList(LIST_VONG &dsVong, LIST_DON &dsDon, LIST_KEP &dsKep, SV 
         }
         giaiPhongBoNhoDSLKKep(dsKep);
     }
+    
+    //xuatSinhVienMang(a, n);
     heapSortArray(a, n, tieuChi);
+    
     if (kieuDL == 2)
     {
         convertToSinglyLinkedList(dsDon, a);
