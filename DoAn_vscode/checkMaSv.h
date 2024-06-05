@@ -25,7 +25,7 @@ bool checkMaSv(string maSv, int luaChon) {
 			if (maSv == p->data.maSV) // So sánh chuỗi sử dụng toán tử ==
 				return false;
 			p = p->pNext_Vong;
-			if(p == listVong.pTail_Vong) break;
+			if (p == listVong.pTail_Vong) break;
 		}
 	}
 
