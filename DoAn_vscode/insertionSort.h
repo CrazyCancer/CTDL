@@ -9,7 +9,7 @@ void insertionSortMang(SV LIST_MANG[], int tieuchi)
         {
             x = LIST_MANG[i].maSV;
             for (j = i - 1; j >= 0 && cmpStr(x, LIST_MANG[j].maSV) < 0; j--)
-                LIST_MANG[j + 1].maSV = LIST_MANG[j].maSV;
+                swap(LIST_MANG[j + 1], LIST_MANG[j]);
             LIST_MANG[j + 1].maSV = x;
         }
     }
@@ -20,8 +20,8 @@ void insertionSortMang(SV LIST_MANG[], int tieuchi)
         for (i = 1; i < soLuong; i++)
         {
             x = LIST_MANG[i].ten;
-            for (j = i - 1; j >= 0 && cmpStr(x, LIST_MANG[j].maSV) < 0; j--)
-                LIST_MANG[j + 1].ten = LIST_MANG[j].ten;
+            for (j = i - 1; j >= 0 && cmpStr(x, LIST_MANG[j].ten) < 0; j--)
+                swap(LIST_MANG[j + 1], LIST_MANG[j]);
             LIST_MANG[j + 1].ten = x;
         }
     }
@@ -33,236 +33,141 @@ void insertionSortMang(SV LIST_MANG[], int tieuchi)
         {
             x = LIST_MANG[i].diem;
             for (j = i - 1; j >= 0 && x < LIST_MANG[j].diem; j--)
-                LIST_MANG[j + 1].diem = LIST_MANG[j].diem;
+                swap(LIST_MANG[j + 1], LIST_MANG[j]);
             LIST_MANG[j + 1].diem = x;
         }
     }
 }
-void insertionSortSinglyLinkedList(LIST_DON &ds, int tieuchi)
+
+void insertionSortSinglyLinkedList(LIST_DON& ds, int tieuChi)
 {
     if (ds.pHead_Don == NULL || ds.pHead_Don->pNext_Don == NULL)
     {
         return;
     }
-    pNODE_DON pSorted = NULL;
-    pNODE_DON pCurrent = ds.pHead_Don;
+
+    pNODE_DON pCurrent = ds.pHead_Don, sorted = NULL;
     while (pCurrent != NULL)
     {
-        if (tieuchi == 1)
+        pNODE_DON pPrev = sorted, pTmp = NULL, nextNode = pCurrent->pNext_Don;
+        while (pPrev != NULL)
         {
-            pNODE_DON pNEXT = pCurrent->pNext_Don;
-            if (pSorted == NULL || cmpStr(pCurrent->data.maSV, pSorted->data.maSV) > 0)
+            if (tieuChi == 1)
             {
-                pCurrent->pNext_Don = pSorted;
-                pSorted = pCurrent;
+                if (cmpStr(pPrev->data.maSV, pCurrent->data.maSV) >= 0)
+                    break;
             }
-            else
+            if (tieuChi == 2)
             {
-                pNODE_DON pTemp = pSorted;
-                while (pTemp->pNext_Don != NULL && cmpStr(pCurrent->data.maSV, pTemp->data.maSV) > 0)
-                {
-                    pTemp = pTemp->pNext_Don;
-                }
-                pCurrent->pNext_Don = pTemp->pNext_Don;
-                pTemp->pNext_Don = pCurrent;
+                if (cmpStr(pPrev->data.ten, pCurrent->data.ten) >= 0)
+                    break;
             }
-            pCurrent = pNEXT;
+            if (tieuChi == 3)
+            {
+                if (pPrev->data.diem >= pCurrent->data.diem)
+                    break;
+            }
+            pTmp = pPrev;
+            pPrev = pPrev->pNext_Don;
         }
-        if (tieuchi == 2)
+
+        if (pTmp == NULL)
         {
-            pNODE_DON pNEXT = pCurrent->pNext_Don;
-            if (pSorted == NULL || cmpStr(pCurrent->data.ten, pSorted->data.ten) > 0)
-            {
-                pCurrent->pNext_Don = pSorted;
-                pSorted = pCurrent;
-            }
-            else
-            {
-                pNODE_DON pTemp = pSorted;
-                while (pTemp->pNext_Don != NULL && cmpStr(pCurrent->data.ten, pTemp->data.ten) > 0)
-                {
-                    pTemp = pTemp->pNext_Don;
-                }
-                pCurrent->pNext_Don = pTemp->pNext_Don;
-                pTemp->pNext_Don = pCurrent;
-            }
-            pCurrent = pNEXT;
+            pCurrent->pNext_Don = sorted;
+            sorted = pCurrent;
         }
-        if (tieuchi == 3)
+        else
         {
-            if (ds.pHead_Don == NULL || ds.pHead_Don->pNext_Don == NULL)
-                return;
-
-            pNODE_DON pSorted = NULL;
-            pNODE_DON pCurrent = ds.pHead_Don; // Lưu node đầu
-
-            while (pCurrent != NULL)
-            {
-                pNODE_DON pNEXT = pCurrent->pNext_Don; // Lưu con trỏ pNEXT tới node kế tiếp
-
-                if (pSorted == NULL || pCurrent->data.diem < pSorted->data.diem)
-                {
-                    pCurrent->pNext_Don = pSorted;
-                    pSorted = pCurrent;
-                }
-                else
-                {
-                    // Tìm vị trí để chèn node hiện tại vào danh sách sắp xếp
-                    pNODE_DON pTemp = pSorted;
-                    while (pTemp->pNext_Don != NULL && pCurrent->data.diem > pTemp->pNext_Don->data.diem)
-                        pTemp = pTemp->pNext_Don;
-
-                    pCurrent->pNext_Don = pTemp->pNext_Don; // Chèn node hiện tại vào sau node Temp
-                    pTemp->pNext_Don = pCurrent;
-                }
-                pCurrent = pNEXT; // Di chuyển đến node kế tiếp
-            }
+            pTmp->pNext_Don = pCurrent;
+            pCurrent->pNext_Don = pPrev;
         }
-        ds.pHead_Don = pSorted;
+        pCurrent = nextNode;
     }
+    ds.pHead_Don = sorted;
 }
 
-void insertionSortDoubleLinkedList(LIST_KEP &ds, int tieuchi)
+void insertionSortDoubleLinkedList(LIST_KEP &dsKep, int tieuChi)
 {
-    if (ds.pHead_Kep == NULL || ds.pHead_Kep->pNext_Kep == NULL)
+    
+    vector<pNODE_KEP> linkedListPointer;
+    pNODE_KEP p = dsKep.pHead_Kep;
+    while (p != NULL)
     {
-        return;
+        linkedListPointer.push_back(p);
+        p = p->pNext_Kep;
     }
-    pNODE_KEP pSorted = NULL;
-    pNODE_KEP pCurrent = ds.pHead_Kep;
-    while (pCurrent != NULL)
+
+    int i, j;
+    for (i = 1; i < soLuong; i++)
     {
-        if (tieuchi == 1)
+        SV key = linkedListPointer[i]->data;
+        if (tieuChi == 1)
         {
-            pNODE_KEP pNEXT = pCurrent->pNext_Kep;
-            if (pSorted == NULL || cmpStr(pCurrent->data.maSV, pSorted->data.maSV) > 0)
-            {
-                pCurrent->pNext_Kep = pSorted;
-                pSorted = pCurrent;
-            }
-            else
-            {
-                pNODE_KEP pTemp = pSorted;
-                while (pTemp->pNext_Kep != NULL && cmpStr(pCurrent->data.maSV, pTemp->data.maSV) > 0)
-                {
-                    pTemp = pTemp->pNext_Kep;
-                }
-                pCurrent->pNext_Kep = pTemp->pNext_Kep;
-                pTemp->pNext_Kep = pCurrent;
-            }
-            pCurrent = pNEXT;
+            for (j = i - 1; j >= 0 && cmpStr(key.maSV, linkedListPointer[j]->data.maSV) < 0; j--)
+                linkedListPointer[j + 1]->data = linkedListPointer[j]->data;
         }
-        if (tieuchi == 2)
+        if (tieuChi == 2)
         {
-            pNODE_KEP pNEXT = pCurrent->pNext_Kep;
-            if (pSorted == NULL || cmpStr(pCurrent->data.ten, pSorted->data.ten) > 0)
-            {
-                pCurrent->pNext_Kep = pSorted;
-                pSorted = pCurrent;
-            }
-            else
-            {
-                pNODE_KEP pTemp = pSorted;
-                while (pTemp->pNext_Kep != NULL && cmpStr(pCurrent->data.ten, pTemp->data.ten) > 0)
-                {
-                    pTemp = pTemp->pNext_Kep;
-                }
-                pCurrent->pNext_Kep = pTemp->pNext_Kep;
-                pTemp->pNext_Kep = pCurrent;
-            }
-            pCurrent = pNEXT;
+            for (j = i - 1; j >= 0 && cmpStr(key.ten, linkedListPointer[j]->data.ten) < 0; j--)
+                linkedListPointer[j + 1]->data = linkedListPointer[j]->data;
         }
-        if (tieuchi == 3)
+        if (tieuChi == 3)
         {
-            pNODE_KEP pNEXT = pCurrent->pNext_Kep; // Lưu con trỏ pNEXT tới node kế tiếp
-
-            if (pSorted == NULL || pCurrent->data.diem < pSorted->data.diem)
-            {
-                pCurrent->pNext_Kep = pSorted;
-                pSorted = pCurrent;
-            }
-            else
-            {
-                // Tìm vị trí để chèn node hiện tại vào danh sách sắp xếp
-                pNODE_KEP pTemp = pSorted;
-                while (pTemp->pNext_Kep != NULL && pCurrent->data.diem > pTemp->pNext_Kep->data.diem)
-                    pTemp = pTemp->pNext_Kep;
-
-                pCurrent->pNext_Kep = pTemp->pNext_Kep; // Chèn node hiện tại vào sau node Temp
-                pTemp->pNext_Kep = pCurrent;
-            }
-            pCurrent = pNEXT; // Di chuyển đến node kế tiếp
+            for (j = i - 1; j >= 0 && key.diem < linkedListPointer[j]->data.diem; j--)
+                linkedListPointer[j + 1]->data = linkedListPointer[j]->data;
         }
-        ds.pHead_Kep = pSorted;
+        linkedListPointer[j + 1]->data = key;
     }
+    /*for (int i = 1; i < soLuong; i++)
+        cout << linkedListPointer[i]->data.maSV << "\n";*/
+    khoiTaoDSLKKep(dsKep);
+    for (int i = 0; i < soLuong; i++)
+    {
+        themVaoCuoiDSLKKep(dsKep, khoiTaoNodeKep(linkedListPointer[i]->data));
+    }
+
+    linkedListPointer.clear();
+    linkedListPointer.shrink_to_fit();
 }
-void insertionSortCircularLinkedList(LIST_VONG &ds, int tieuchi)
+
+void insertionSortCircularLinkedList(LIST_VONG& dsVong, int tieuChi)
 {
-    pNODE_VONG pSorted = ds.pTail_Vong->pNext_Vong;
-    pNODE_VONG pCurrent = ds.pTail_Vong->pNext_Vong;
-    while (pCurrent != NULL)
+    vector<pNODE_VONG> linkedListPointer;
+    pNODE_VONG p = dsVong.pTail_Vong->pNext_Vong;
+    while (p != dsVong.pTail_Vong)
     {
-        if (tieuchi == 1)
-        {
-            pNODE_VONG pNEXT = pCurrent->pNext_Vong;
-            if (pSorted == NULL || cmpStr(pCurrent->data.maSV, pSorted->data.maSV) > 0)
-            {
-                pCurrent->pNext_Vong = pSorted;
-                pSorted = pCurrent;
-            }
-            else
-            {
-                pNODE_VONG pTemp = pSorted;
-                while (pTemp->pNext_Vong != NULL && cmpStr(pCurrent->data.maSV, pTemp->data.maSV) > 0)
-                {
-                    pTemp = pTemp->pNext_Vong;
-                }
-                pCurrent->pNext_Vong = pTemp->pNext_Vong;
-                pTemp->pNext_Vong = pCurrent;
-            }
-            pCurrent = pNEXT;
-        }
-        if (tieuchi == 2)
-        {
-            pNODE_VONG pNEXT = pCurrent->pNext_Vong;
-            if (pSorted == NULL || cmpStr(pCurrent->data.ten, pSorted->data.ten) > 0)
-            {
-                pCurrent->pNext_Vong = pSorted;
-                pSorted = pCurrent;
-            }
-            else
-            {
-                pNODE_VONG pTemp = pSorted;
-                while (pTemp->pNext_Vong != NULL && cmpStr(pCurrent->data.ten, pTemp->data.ten) > 0)
-                {
-                    pTemp = pTemp->pNext_Vong;
-                }
-                pCurrent->pNext_Vong = pTemp->pNext_Vong;
-                pTemp->pNext_Vong = pCurrent;
-            }
-            pCurrent = pNEXT;
-        }
-        if (tieuchi == 3)
-        {
-            pNODE_VONG pNEXT = pCurrent->pNext_Vong; // Lưu con trỏ pNEXT tới node kế tiếp
-
-            if (pSorted == NULL || pCurrent->data.diem < pSorted->data.diem)
-            {
-                pCurrent->pNext_Vong = pSorted;
-                pSorted = pCurrent;
-            }
-            else
-            {
-                // Tìm vị trí để chèn node hiện tại vào danh sách sắp xếp
-                pNODE_VONG pTemp = pSorted;
-                while (pTemp->pNext_Vong != NULL && pCurrent->data.diem > pTemp->pNext_Vong->data.diem)
-                    pTemp = pTemp->pNext_Vong;
-
-                pCurrent->pNext_Vong = pTemp->pNext_Vong; // Chèn node hiện tại vào sau node Temp
-                pTemp->pNext_Vong = pCurrent;
-            }
-            pCurrent = pNEXT; // Di chuyển đến node kế tiếp
-        }
-        ds.pTail_Vong = pSorted;
+        linkedListPointer.push_back(p);
+        p = p->pNext_Vong;
     }
+    linkedListPointer.push_back(p);
+
+    int i, j;
+    for (i = 1; i < soLuong; i++)
+    {
+        SV key = linkedListPointer[i]->data;
+        if (tieuChi == 1)
+        {
+            for (j = i - 1; j >= 0 && cmpStr(key.maSV, linkedListPointer[j]->data.maSV) < 0; j--)
+                linkedListPointer[j + 1]->data = linkedListPointer[j]->data;
+        }
+        if (tieuChi == 2)
+        {
+            for (j = i - 1; j >= 0 && cmpStr(key.ten, linkedListPointer[j]->data.ten) < 0; j--)
+                linkedListPointer[j + 1]->data = linkedListPointer[j]->data;
+        }
+        if (tieuChi == 3)
+        {
+            for (j = i - 1; j >= 0 && key.diem < linkedListPointer[j]->data.diem; j--)
+                linkedListPointer[j + 1]->data = linkedListPointer[j]->data;
+        }
+        linkedListPointer[j + 1]->data = key;
+    }
+    /*for (int i = 1; i < soLuong; i++)
+        cout << linkedListPointer[i]->data.maSV << "\n";*/
+    khoiTaoDSLKVong(dsVong);
+    for (int i = 0; i < soLuong; i++)
+        themVaoCuoiDSLKVong(dsVong, khoiTaoNodeVong(linkedListPointer[i]->data));
+
+    linkedListPointer.clear();
+    linkedListPointer.shrink_to_fit();
 }

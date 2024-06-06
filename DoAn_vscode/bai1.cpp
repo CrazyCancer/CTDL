@@ -147,8 +147,7 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
 
         if (luaChon == "9")
         {
-            for(int i = 0; i < soLuongSinhVien; i++)
-                listMang[i] = {};
+            soLuong = 0;
             break;
         }
 
@@ -290,6 +289,7 @@ void menuChoDSLKDon()
         if (luaChon == "9")
         {
             giaiPhongBoNhoDSLKDon(listDon);
+            soLuong = 0;
             break;
         }
         if (luaChon == "0")
@@ -429,6 +429,8 @@ void menuChoDSLKVong(LIST_VONG& listVong)
 
         if (luaChon == "9")
         {
+            giaiPhongBoNhoDSLKVong(listVong);
+            soLuong = 0;
             break;
         }
 
@@ -553,7 +555,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
             }
             if (arrangeType == 5)
             {
-                clock_t start = clock();
+                clock_t start = clock(); 
                 insertionSortDoubleLinkedList(listKep, tieuChi);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
@@ -570,6 +572,8 @@ void menuChoDSLKKep(LIST_KEP listKep)
 
         if (luaChon == "9")
         {
+            giaiPhongBoNhoDSLKKep(listKep);
+            soLuong = 0;
             break;
         }
         if (luaChon == "0")

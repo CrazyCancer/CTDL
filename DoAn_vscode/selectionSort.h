@@ -39,7 +39,7 @@ void selectionSortMang(SV LIST_MANG[], int tieuChi)
     }
     if (tieuChi == 3)
     {
-        int min;
+        float min;
         for (i = 0; i < soLuong - 1; i++)
         {
             min = LIST_MANG[i].diem;
