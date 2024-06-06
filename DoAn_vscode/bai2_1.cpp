@@ -83,7 +83,7 @@ void Try(int n, int row, int col) {
     if (count == n*n) {
         show();
     }
-    else cout << "\nKhông thể đi hết bàn cờ\n";
+    else cout << "\nKhông thể đi hết bàn cờ. Vui lòng chọn vị trí bắt đầu khác\n";
     
     auto end_processing_time = high_resolution_clock::now();
     auto processing_duration = duration_cast<milliseconds>(end_processing_time - start_processing_time);
