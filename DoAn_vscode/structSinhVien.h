@@ -17,6 +17,7 @@
 using namespace std;
 
 int soLuong = 0; //so luong sinh vien
+int kieuDL;
 
 typedef struct sinhVien
 {

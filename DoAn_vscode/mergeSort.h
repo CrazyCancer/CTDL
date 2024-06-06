@@ -306,7 +306,7 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
     {
         while (size < soLuong)
         {
-            string dstam[MAX];
+            SV dstam[MAX];
             low1 = 0;
             k = 0;
             while (low1 + size < soLuong)
@@ -316,19 +316,19 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
                 up2 = (low2 + size - 1 < soLuong) ? low2 + size - 1 : soLuong - 1;
                 for (i = low1, j = low2; i <= up1 && j <= up2; k++)
                     if (LIST_MANG[i].maSV <= LIST_MANG[j].maSV)
-                        dstam[k] = LIST_MANG[i++].maSV;
+                        dstam[k] = LIST_MANG[i++];
                     else
-                        dstam[k] = LIST_MANG[j++].maSV;
+                        dstam[k] = LIST_MANG[j++];
                 for (; i <= up1; k++)
-                    dstam[k] = LIST_MANG[i++].maSV;
+                    dstam[k] = LIST_MANG[i++];
                 for (; j <= up2; k++)
-                    dstam[k] = LIST_MANG[j++].maSV;
+                    dstam[k] = LIST_MANG[j++];
                 low1 = up2 + 1;
             }
             for (i = low1; k < soLuong; i++)
-                dstam[k++] = LIST_MANG[i].maSV;
+                dstam[k++] = LIST_MANG[i];
             for (i = 0; i < soLuong; i++) // gan nguoc tra lai cho A
-                LIST_MANG[i].maSV = dstam[i];
+                LIST_MANG[i] = dstam[i];
             size *= 2;
         }
     }
@@ -336,7 +336,7 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
     {
         while (size < soLuong)
         {
-            string dstam[MAX];
+            SV dstam[MAX];
             low1 = 0;
             k = 0;
             while (low1 + size < soLuong)
@@ -345,20 +345,20 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
                 low2 = up1 + 1;
                 up2 = (low2 + size - 1 < soLuong) ? low2 + size - 1 : soLuong - 1;
                 for (i = low1, j = low2; i <= up1 && j <= up2; k++)
-                    if (LIST_MANG[i].ten <= LIST_MANG[j].ten)
-                        dstam[k] = LIST_MANG[i++].ten;
+                    if (cmpStr(LIST_MANG[i].ten, LIST_MANG[j].ten) <=0)
+                        dstam[k] = LIST_MANG[i++];
                     else
-                        dstam[k] = LIST_MANG[j++].ten;
+                        dstam[k] = LIST_MANG[j++];
                 for (; i <= up1; k++)
-                    dstam[k] = LIST_MANG[i++].ten;
+                    dstam[k] = LIST_MANG[i++];
                 for (; j <= up2; k++)
-                    dstam[k] = LIST_MANG[j++].ten;
+                    dstam[k] = LIST_MANG[j++];
                 low1 = up2 + 1;
             }
             for (i = low1; k < soLuong; i++)
-                dstam[k++] = LIST_MANG[i].ten;
+                dstam[k++] = LIST_MANG[i];
             for (i = 0; i < soLuong; i++) // gan nguoc tra lai cho A
-                LIST_MANG[i].ten = dstam[i];
+                LIST_MANG[i] = dstam[i];
             size *= 2;
         }
     }
@@ -366,7 +366,7 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
     {
         while (size < soLuong)
         {
-            int dstam[MAX];
+            SV dstam[MAX];
             low1 = 0;
             k = 0;
             while (low1 + size < soLuong)
@@ -376,19 +376,19 @@ void mergeSortArray(SV LIST_MANG[], int tieuChi)
                 up2 = (low2 + size - 1 < soLuong) ? low2 + size - 1 : soLuong - 1;
                 for (i = low1, j = low2; i <= up1 && j <= up2; k++)
                     if (LIST_MANG[i].diem <= LIST_MANG[j].diem)
-                        dstam[k] = LIST_MANG[i++].diem;
+                        dstam[k] = LIST_MANG[i++];
                     else
-                        dstam[k] = LIST_MANG[j++].diem;
+                        dstam[k] = LIST_MANG[j++];
                 for (; i <= up1; k++)
-                    dstam[k] = LIST_MANG[i++].diem;
+                    dstam[k] = LIST_MANG[i++];
                 for (; j <= up2; k++)
-                    dstam[k] = LIST_MANG[j++].diem;
+                    dstam[k] = LIST_MANG[j++];
                 low1 = up2 + 1;
             }
             for (i = low1; k < soLuong; i++)
-                dstam[k++] = LIST_MANG[i].diem;
+                dstam[k++] = LIST_MANG[i];
             for (i = 0; i < soLuong; i++) // gan nguoc tra lai cho A
-                LIST_MANG[i].diem = dstam[i];
+                LIST_MANG[i] = dstam[i];
             size *= 2;
         }
     }

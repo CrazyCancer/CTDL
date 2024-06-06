@@ -103,44 +103,44 @@ void menuChoMang(SV listMang[], int &soLuongSinhVien)
             if (arrangeType == 1)
             {
                 clock_t start = clock();
-				bubbleSortArray(LIST_MANG, tieuChi);
-				clock_t end = clock();
-				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+                bubbleSortArray(LIST_MANG, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 2)
             {
                 clock_t start = clock();
-				quickSortArray(LIST_MANG, 0, soLuongSinhVien - 1, tieuChi);
-				clock_t end = clock();
-				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+                quickSortArray(LIST_MANG, 0, soLuongSinhVien - 1, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 3)
             {
                 clock_t start = clock();
-				heapSortArray(LIST_MANG, soLuongSinhVien, tieuChi);
-				clock_t end = clock();
-				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+                heapSortArray(LIST_MANG, soLuongSinhVien, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 4)
             {
                 clock_t start = clock();
-				mergeSortArray(LIST_MANG, tieuChi);
-				clock_t end = clock();
-				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+                mergeSortArray(LIST_MANG, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 5)
             {
                 clock_t start = clock();
-				insertionSortMang(LIST_MANG, tieuChi);
-				clock_t end = clock();
-				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+                insertionSortMang(LIST_MANG, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 6)
             {
                 clock_t start = clock();
-				selectionSortMang(LIST_MANG, tieuChi);
-				clock_t end = clock();
-				cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
+                selectionSortMang(LIST_MANG, tieuChi);
+                clock_t end = clock();
+                cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             system("pause");
         }
@@ -183,6 +183,7 @@ void menuChoDSLKDon()
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
+        
 
         regex pattern("[0-9]");
         while (!regex_match(luaChon, pattern))
@@ -251,21 +252,21 @@ void menuChoDSLKDon()
             if (arrangeType == 2)
             {
                 clock_t start = clock();
-                quickSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                quickSortLinkedList(listVong, listDon, listKep, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 3)
             {
                 clock_t start = clock();
-                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, stoi(luaChon), tieuChi, soLuong);
+                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 4)
             {
                 clock_t start = clock();
-                mergeSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                mergeSortLinkedList(listVong, listDon, listKep, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
@@ -322,6 +323,7 @@ void menuChoDSLKVong(LIST_VONG& listVong)
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
+        
 
         regex pattern("[0-9]");
         while (!regex_match(luaChon, pattern))
@@ -383,28 +385,28 @@ void menuChoDSLKVong(LIST_VONG& listVong)
             if (arrangeType == 1)
             {
                 clock_t start = clock();
-                bubbleSortDoublyLinkedList(listKep, tieuChi);
+                bubbleSortCircularLinkedList(listVong, tieuChi);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 2)
             {
                 clock_t start = clock();
-                quickSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                quickSortLinkedList(listVong, listDon, listKep, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 3)
             {
                 clock_t start = clock();
-                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, stoi(luaChon), tieuChi, soLuong);
+                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 4)
             {
                 clock_t start = clock();
-                mergeSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                mergeSortLinkedList(listVong, listDon, listKep, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
@@ -461,6 +463,7 @@ void menuChoDSLKKep(LIST_KEP listKep)
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
+        
 
         regex pattern("[0-9]");
         while (!regex_match(luaChon, pattern))
@@ -523,28 +526,28 @@ void menuChoDSLKKep(LIST_KEP listKep)
             if (arrangeType == 1)
             {
                 clock_t start = clock();
-                bubbleSortCircularLinkedList(listVong, tieuChi);
+                bubbleSortDoublyLinkedList(listKep, tieuChi);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 2)
             {
                 clock_t start = clock();
-                quickSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                quickSortLinkedList(listVong, listDon, listKep, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 3)
             {
                 clock_t start = clock();
-                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, stoi(luaChon), tieuChi, soLuong);
+                heapSortLinkedList(listVong, listDon, listKep, LIST_MANG, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
             if (arrangeType == 4)
             {
                 clock_t start = clock();
-                mergeSortLinkedList(listVong, listDon, listKep, stoi(luaChon), tieuChi, soLuong);
+                mergeSortLinkedList(listVong, listDon, listKep, kieuDL, tieuChi, soLuong);
                 clock_t end = clock();
                 cout << "Time run: " << (float)(end - start) / CLOCKS_PER_SEC << " s" << endl;
             }
@@ -595,6 +598,7 @@ static void mainMenu()
         cout << "\n\tVui lòng chọn cách thức lưu trữ(nhập số)";
         cout << "\n\n\t - Nhập lựa chọn: ";
         getline(cin, luaChon);
+        kieuDL = stoi(luaChon);
 
         regex pattern("[0-4]");
         while (!regex_match(luaChon, pattern))
